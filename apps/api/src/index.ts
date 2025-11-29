@@ -7,6 +7,7 @@ import express from 'express';
 import cors from 'cors';
 import { errorHandler } from './middleware/error-handler';
 import { authRouter } from './routes/auth';
+import { contributionTypesRouter } from './routes/contribution-types';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -19,6 +20,7 @@ app.get('/health', (_req, res) => {
 });
 
 app.use('/v1/auth', authRouter);
+app.use('/v1/contribution-types', contributionTypesRouter);
 
 app.use(errorHandler);
 
