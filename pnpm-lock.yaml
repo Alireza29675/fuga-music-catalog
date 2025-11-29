@@ -17,6 +17,12 @@ importers:
 
   shared/constants: {}
 
+  shared/types:
+    dependencies:
+      '@fuga-catalog/constants':
+        specifier: workspace:*
+        version: link:../constants
+
 packages:
 
   '@types/node@22.19.1':
