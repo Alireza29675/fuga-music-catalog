@@ -1,7 +1,9 @@
 {
   "name": "fuga-music-catalog",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "dev:api": "pnpm --filter @fuga-catalog/api dev"
+  },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "typescript": "^5.7.3"
