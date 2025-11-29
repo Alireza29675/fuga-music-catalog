@@ -5,6 +5,8 @@ config({ path: resolve(__dirname, '../../../.env') });
 
 import express from 'express';
 import cors from 'cors';
+import { errorHandler } from './middleware/error-handler';
+import { authRouter } from './routes/auth';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -15,6 +17,10 @@ app.use(express.json());
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
+
+app.use('/v1/auth', authRouter);
+
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`API running on http://localhost:${port}`);
