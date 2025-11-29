@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev:api": "pnpm --filter @fuga-catalog/api dev",
+    "test:api": "pnpm --filter @fuga-catalog/api test",
     "db:generate": "pnpm --filter @fuga-catalog/api db:generate",
     "db:push": "pnpm --filter @fuga-catalog/api db:push",
     "db:seed": "pnpm --filter @fuga-catalog/api db:seed"
