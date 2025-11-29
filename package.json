@@ -2,7 +2,10 @@
   "name": "fuga-music-catalog",
   "private": true,
   "scripts": {
-    "dev:api": "pnpm --filter @fuga-catalog/api dev"
+    "dev:api": "pnpm --filter @fuga-catalog/api dev",
+    "db:generate": "pnpm --filter @fuga-catalog/api db:generate",
+    "db:push": "pnpm --filter @fuga-catalog/api db:push",
+    "db:seed": "pnpm --filter @fuga-catalog/api db:seed"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

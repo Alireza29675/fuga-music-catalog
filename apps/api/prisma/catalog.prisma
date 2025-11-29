@@ -1,0 +1,68 @@
+model Product {
+  id              Int      @id @default(autoincrement())
+  name            String
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @default(now()) @updatedAt @map("updated_at")
+  isDeleted       Boolean  @default(false) @map("is_deleted")
+  createdByUserId Int      @map("created_by_user_id")
+  coverArtId      Int?     @map("cover_art_id")
+
+  createdBy      User            @relation(fields: [createdByUserId], references: [id])
+  coverArt       CoverArt?       @relation(fields: [coverArtId], references: [id])
+  productArtists ProductArtist[]
+
+  @@map("product")
+}
+
+model CoverArt {
+  id                  Int       @id @default(autoincrement())
+  resourceUri         String    @map("resource_uri")
+  providerKey         String    @map("provider_key")
+  mimeType            String    @map("mime_type")
+  uploadedAt          DateTime  @default(now()) @map("uploaded_at")
+  createdByUserId     Int       @map("created_by_user_id")
+  markedForDeletionAt DateTime? @map("marked_for_deletion_at")
+
+  createdBy User      @relation(fields: [createdByUserId], references: [id])
+  products  Product[]
+
+  @@map("cover_art")
+}
+
+model Artist {
+  id              Int      @id @default(autoincrement())
+  name            String
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @default(now()) @updatedAt @map("updated_at")
+  createdByUserId Int      @map("created_by_user_id")
+
+  createdBy      User            @relation(fields: [createdByUserId], references: [id])
+  productArtists ProductArtist[]
+
+  @@map("artist")
+}
+
+model ContributionType {
+  id              Int     @id @default(autoincrement())
+  name            String  @unique
+  description     String?
+  createdByUserId Int     @map("created_by_user_id")
+
+  createdBy      User            @relation(fields: [createdByUserId], references: [id])
+  productArtists ProductArtist[]
+
+  @@map("contribution_type")
+}
+
+model ProductArtist {
+  productId          Int  @map("product_id")
+  artistId           Int  @map("artist_id")
+  contributionTypeId Int? @map("contribution_type_id")
+
+  product          Product           @relation(fields: [productId], references: [id])
+  artist           Artist            @relation(fields: [artistId], references: [id])
+  contributionType ContributionType? @relation(fields: [contributionTypeId], references: [id])
+
+  @@id([productId, artistId])
+  @@map("product_artist")
+}
