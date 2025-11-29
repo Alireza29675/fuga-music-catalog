@@ -1,0 +1,35 @@
+export const PERMISSIONS = {
+  PRODUCT_VIEW: 'product.view',
+  PRODUCT_CREATE: 'product.create',
+  PRODUCT_EDIT: 'product.edit',
+} as const;
+
+export const ALLOWED_IMAGE_FORMATS = {
+  JPEG: 'image/jpeg',
+  PNG: 'image/png',
+  WEBP: 'image/webp',
+} as const;
+
+export const MAX_COVER_ART_SIZE_BYTES = 10 * 1024 * 1024;
+
+export const HTTP_STATUS = {
+  OK: 200,
+  CREATED: 201,
+  NO_CONTENT: 204,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  INTERNAL_SERVER_ERROR: 500,
+} as const;
+
+export const ERROR_CODES = {
+  INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
+  UNAUTHORIZED: 'UNAUTHORIZED',
+  FORBIDDEN: 'FORBIDDEN',
+  NOT_FOUND: 'NOT_FOUND',
+  VALIDATION_ERROR: 'VALIDATION_ERROR',
+  INVALID_FILE_TYPE: 'INVALID_FILE_TYPE',
+  FILE_TOO_LARGE: 'FILE_TOO_LARGE',
+  INTERNAL_ERROR: 'INTERNAL_ERROR',
+} as const;
