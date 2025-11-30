@@ -8,23 +8,25 @@ import type { LoginApiResponse } from '@fuga-catalog/types';
 const JWT_SECRET = env.JWT_SECRET;
 const JWT_EXPIRES_IN = '24h';
 
+const PERMISSIONS_INCLUDE = {
+  userRoles: {
+    include: {
+      role: {
+        include: {
+          rolePermissions: {
+            include: { permission: true },
+          },
+        },
+      },
+    },
+  },
+}
+
 export class AuthService {
   async login(email: string, password: string): Promise<LoginApiResponse> {
     const user = await prisma.user.findUnique({
       where: { email },
-      include: {
-        userRoles: {
-          include: {
-            role: {
-              include: {
-                rolePermissions: {
-                  include: { permission: true },
-                },
-              },
-            },
-          },
-        },
-      },
+      include: PERMISSIONS_INCLUDE,
     });
 
     if (!user || !user.isActive) {
