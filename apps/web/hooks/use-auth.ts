@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { apiFetch } from '@/lib/api';
+import { apiFetch } from '@/lib/api/client';
 import type { LoginInput, LoginApiResponse, SuccessResponse } from '@fuga-catalog/types';
 
 interface AuthUser {

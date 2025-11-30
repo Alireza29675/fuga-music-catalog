@@ -1,3 +1,6 @@
+/**
+ * Client-side API (Browser → Next.js Routes)
+ */
 import type { ApiError, CoverArtUploadResponse } from '@fuga-catalog/types';
 
 export async function apiFetch<T>(

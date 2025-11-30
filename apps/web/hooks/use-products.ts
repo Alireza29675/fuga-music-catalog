@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiFetch, uploadFile } from '@/lib/api';
+import { apiFetch, uploadFile } from '@/lib/api/client';
 import type {
   CreateProductInput,
   UpdateProductInput,

@@ -1,8 +1,8 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { useAuth } from './use-auth';
-import { apiFetch } from '@/lib/api';
+import { apiFetch } from '@/lib/api/client';
 
-jest.mock('@/lib/api');
+jest.mock('@/lib/api/client');
 
 const mockApiFetch = apiFetch as jest.MockedFunction<typeof apiFetch>;
 

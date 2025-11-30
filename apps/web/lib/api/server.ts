@@ -1,3 +1,6 @@
+/**
+ * Server-side API (Next.js Server → API Server)
+ */
 import { cookies } from 'next/headers';
 import type { ApiError } from '@fuga-catalog/types';
 

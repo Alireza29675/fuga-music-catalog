@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { apiRequestTyped } from '@/lib/api-client';
+import { apiRequestTyped } from '@/lib/api/server';
 import { HTTP_STATUS } from '@fuga-catalog/constants';
 import type {
   GetProductsResponse,
