@@ -1,5 +1,5 @@
-import type { SuccessResponse } from "./common";
-import type { PermissionKey } from "./permissions";
+import type { SuccessResponse } from './common';
+import type { PermissionKey } from './permissions';
 
 export interface AuthPayload {
   userId: number;

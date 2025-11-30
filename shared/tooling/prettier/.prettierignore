@@ -1,0 +1,27 @@
+# Build outputs
+dist
+build
+.next
+out
+
+# Generated code
+generated
+*.generated.*
+
+# Dependencies
+node_modules
+
+# Coverage
+coverage
+.nyc_output
+
+# Environment
+.env
+.env.*
+
+# Misc
+.DS_Store
+*.log
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

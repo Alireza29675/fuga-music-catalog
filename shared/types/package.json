@@ -5,9 +5,18 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@fuga-catalog/constants": "workspace:*"
+    "@fuga-catalog/constants": "workspace:*",
+    "@fuga-catalog/tooling": "workspace:*"
+  },
+  "devDependencies": {
+    "eslint": "^9.16.0",
+    "prettier": "^3.4.1"
   }
 }

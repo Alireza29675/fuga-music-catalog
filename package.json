@@ -15,7 +15,11 @@
     "db:push": "pnpm --filter @fuga-catalog/api db:push",
     "db:seed": "pnpm --filter @fuga-catalog/api db:seed",
     "db:studio": "pnpm --filter @fuga-catalog/api db:studio",
-    "db:setup": "pnpm db:generate && pnpm db:push && pnpm --filter @fuga-catalog/api db:seed"
+    "db:setup": "pnpm db:generate && pnpm db:push && pnpm --filter @fuga-catalog/api db:seed",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "format": "pnpm -r format",
+    "format:check": "pnpm -r format:check"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
