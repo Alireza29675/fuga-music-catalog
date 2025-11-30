@@ -1,6 +1,8 @@
-import type { ERROR_CODES } from '@fuga-catalog/constants';
+import type { HTTP_STATUS, ERROR_CODES } from '@fuga-catalog/constants';
 
 export type ErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES];
+
+export type HttpStatusCode = (typeof HTTP_STATUS)[keyof typeof HTTP_STATUS];
 
 export interface ApiError {
   error: string;
