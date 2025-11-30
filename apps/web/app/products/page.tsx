@@ -2,165 +2,26 @@
 
 import { PERMISSIONS } from '@fuga-catalog/constants';
 import type { Product, CreateProductInput, UpdateProductInput } from '@fuga-catalog/types';
-import { Plus, Pencil, Trash2, Loader2, LogOut } from 'lucide-react';
+import { Plus, Pencil, Trash2, LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import * as S from './products.styles';
 import { PermissionGuard } from '@/components/permission-guard';
 import { ProductForm } from '@/components/product-form';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button, ButtonIcon } from '@/components/ui/button';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Dialog,
-  DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
   DialogFooter,
+  ScrollableDialogContent,
 } from '@/components/ui/dialog';
+import { LoadingContainer, SpinningIcon } from '@/components/ui/loading';
 import { useToast } from '@/components/ui/toast';
 import { useAuth } from '@/hooks/use-auth';
 import { useProducts, useCreateProduct, useUpdateProduct, useDeleteProduct } from '@/hooks/use-products';
-
-const spin = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`;
-
-const PageWrapper = styled.div`
-  min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.background};
-`;
-
-const Header = styled.header`
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-`;
-
-const HeaderContent = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.md};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Title = styled.h1`
-  font-size: ${({ theme }) => theme.fontSize['2xl']};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
-`;
-
-const Main = styled.main`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.md};
-`;
-
-const SectionHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-`;
-
-const SectionTitle = styled.h2`
-  font-size: ${({ theme }) => theme.fontSize.xl};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-`;
-
-const ProductGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: ${({ theme }) => theme.spacing.md};
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1280px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-`;
-
-const ProductCard = styled(Card)`
-  overflow: hidden;
-`;
-
-const CoverArtContainer = styled.div`
-  aspect-ratio: 1;
-  position: relative;
-  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const ProductInfo = styled(CardContent)`
-  padding: ${({ theme }) => theme.spacing.md};
-`;
-
-const ArtistList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-`;
-
-const ArtistText = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
-const ActionButtons = styled(CardFooter)`
-  padding: ${({ theme }) => theme.spacing.md};
-  padding-top: 0;
-  display: flex;
-  gap: ${({ theme }) => theme.spacing.sm};
-`;
-
-const FlexButton = styled(Button)`
-  flex: 1;
-`;
-
-const EmptyState = styled(CardContent)`
-  padding: ${({ theme }) => theme.spacing['3xl']} ${({ theme }) => theme.spacing.md};
-  text-align: center;
-`;
-
-const EmptyText = styled.p`
-  color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-`;
-
-const LoadingContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SpinningIcon = styled(Loader2)`
-  animation: ${spin} 1s linear infinite;
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
-const ScrollableDialogContent = styled(DialogContent)`
-  max-width: 42rem;
-  max-height: 90vh;
-  overflow-y: auto;
-`;
-
-const ButtonIcon = styled.span`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-`;
 
 export default function ProductsPage() {
   const router = useRouter();
@@ -223,22 +84,22 @@ export default function ProductsPage() {
   }
 
   return (
-    <PageWrapper>
-      <Header>
-        <HeaderContent>
-          <Title>FUGA Music Catalog</Title>
+    <S.PageWrapper>
+      <S.Header>
+        <S.HeaderContent>
+          <S.Title>FUGA Music Catalog</S.Title>
           <Button variant="outline" onClick={handleLogout}>
             <ButtonIcon>
               <LogOut size={16} />
               Logout
             </ButtonIcon>
           </Button>
-        </HeaderContent>
-      </Header>
+        </S.HeaderContent>
+      </S.Header>
 
-      <Main>
-        <SectionHeader>
-          <SectionTitle>Products</SectionTitle>
+      <S.Main>
+        <S.SectionHeader>
+          <S.SectionTitle>Products</S.SectionTitle>
           <PermissionGuard permission={PERMISSIONS.PRODUCT_CREATE}>
             <Button onClick={() => setIsCreateDialogOpen(true)}>
               <ButtonIcon>
@@ -247,12 +108,12 @@ export default function ProductsPage() {
               </ButtonIcon>
             </Button>
           </PermissionGuard>
-        </SectionHeader>
+        </S.SectionHeader>
 
         {products && products.length === 0 ? (
           <Card>
-            <EmptyState>
-              <EmptyText>No products yet. Create your first one!</EmptyText>
+            <S.EmptyState>
+              <S.EmptyText>No products yet. Create your first one!</S.EmptyText>
               <PermissionGuard permission={PERMISSIONS.PRODUCT_CREATE}>
                 <Button onClick={() => setIsCreateDialogOpen(true)}>
                   <ButtonIcon>
@@ -261,51 +122,51 @@ export default function ProductsPage() {
                   </ButtonIcon>
                 </Button>
               </PermissionGuard>
-            </EmptyState>
+            </S.EmptyState>
           </Card>
         ) : (
-          <ProductGrid>
+          <S.ProductGrid>
             {products?.map((product) => (
-              <ProductCard key={product.id}>
+              <S.ProductCard key={product.id}>
                 <CardHeader style={{ padding: 0 }}>
-                  <CoverArtContainer>
+                  <S.CoverArtContainer>
                     {product.coverArt && <img src={product.coverArt.resourceUri} alt={product.name} />}
-                  </CoverArtContainer>
+                  </S.CoverArtContainer>
                 </CardHeader>
-                <ProductInfo>
+                <S.ProductInfo>
                   <CardTitle style={{ fontSize: '1.125rem', marginBottom: '0.5rem' }}>{product.name}</CardTitle>
-                  <ArtistList>
+                  <S.ArtistList>
                     {product.productArtists.map((pa, index) => (
-                      <ArtistText key={index}>
+                      <S.ArtistText key={index}>
                         {pa.artist.name}
                         {pa.contributionType && ` (${pa.contributionType.name})`}
-                      </ArtistText>
+                      </S.ArtistText>
                     ))}
-                  </ArtistList>
-                </ProductInfo>
-                <ActionButtons>
+                  </S.ArtistList>
+                </S.ProductInfo>
+                <S.ActionButtons>
                   <PermissionGuard permission={PERMISSIONS.PRODUCT_EDIT}>
-                    <FlexButton variant="outline" size="sm" onClick={() => setEditingProduct(product)}>
+                    <S.FlexButton variant="outline" size="sm" onClick={() => setEditingProduct(product)}>
                       <ButtonIcon>
                         <Pencil size={16} />
                         Edit
                       </ButtonIcon>
-                    </FlexButton>
+                    </S.FlexButton>
                   </PermissionGuard>
                   <PermissionGuard permission={PERMISSIONS.PRODUCT_EDIT}>
-                    <FlexButton variant="outline" size="sm" onClick={() => setDeletingProduct(product)}>
+                    <S.FlexButton variant="outline" size="sm" onClick={() => setDeletingProduct(product)}>
                       <ButtonIcon>
                         <Trash2 size={16} />
                         Delete
                       </ButtonIcon>
-                    </FlexButton>
+                    </S.FlexButton>
                   </PermissionGuard>
-                </ActionButtons>
-              </ProductCard>
+                </S.ActionButtons>
+              </S.ProductCard>
             ))}
-          </ProductGrid>
+          </S.ProductGrid>
         )}
-      </Main>
+      </S.Main>
 
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
         <ScrollableDialogContent>
@@ -339,11 +200,11 @@ export default function ProductsPage() {
       </Dialog>
 
       <Dialog open={!!deletingProduct} onOpenChange={(open) => !open && setDeletingProduct(null)}>
-        <DialogContent>
+        <ScrollableDialogContent>
           <DialogHeader>
             <DialogTitle>Delete Product</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete "{deletingProduct?.name}"? This action cannot be undone.
+              Are you sure you want to delete "{deletingProduct?.name}"?
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -361,8 +222,8 @@ export default function ProductsPage() {
               )}
             </Button>
           </DialogFooter>
-        </DialogContent>
+        </ScrollableDialogContent>
       </Dialog>
-    </PageWrapper>
+    </S.PageWrapper>
   );
 }

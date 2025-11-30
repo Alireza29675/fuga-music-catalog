@@ -1,9 +1,9 @@
 'use client';
 
-import { Check, Plus } from 'lucide-react';
-import * as React from 'react';
-import styled from 'styled-components';
-import { Button } from '@/components/ui/button';
+import type { Artist } from '@fuga-catalog/types';
+import { Plus } from 'lucide-react';
+import { useState } from 'react';
+import * as S from './artistCombobox.styles';
 import {
   Command,
   CommandEmpty,
@@ -13,12 +13,7 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-
-interface Artist {
-  id: number;
-  name: string;
-}
+import { Popover, PopoverTrigger } from '@/components/ui/popover';
 
 interface ArtistComboboxProps {
   artists: Artist[];
@@ -30,32 +25,6 @@ interface ArtistComboboxProps {
   disabled?: boolean;
 }
 
-const TriggerButton = styled(Button)`
-  width: 100%;
-  justify-content: flex-start;
-  font-weight: normal;
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
-const StyledPopoverContent = styled(PopoverContent)`
-  width: var(--radix-popover-trigger-width);
-  padding: 0;
-`;
-
-const CreateItemContent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  font-weight: ${({ theme }) => theme.fontWeight.medium};
-  color: ${({ theme }) => theme.colors.primary};
-`;
-
-const CheckIcon = styled(Check)`
-  margin-left: auto;
-  height: 1rem;
-  width: 1rem;
-`;
-
 export function ArtistCombobox({
   artists,
   selectedArtists,
@@ -65,8 +34,8 @@ export function ArtistCombobox({
   isCreating = false,
   disabled = false,
 }: ArtistComboboxProps) {
-  const [open, setOpen] = React.useState(false);
-  const [search, setSearch] = React.useState('');
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
 
   const hasExactMatch = artists.some((artist) => artist.name.toLowerCase() === search.toLowerCase());
 
@@ -91,11 +60,11 @@ export function ArtistCombobox({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <TriggerButton variant="outline" role="combobox" aria-expanded={open} disabled={disabled}>
+        <S.TriggerButton type="button" variant="outline" role="combobox" aria-expanded={open} disabled={disabled}>
           Search or create artist...
-        </TriggerButton>
+        </S.TriggerButton>
       </PopoverTrigger>
-      <StyledPopoverContent align="start">
+      <S.StyledPopoverContent align="start">
         <Command shouldFilter={false}>
           <CommandInput placeholder="Search or create artist..." value={search} onValueChange={setSearch} />
           <CommandList>
@@ -116,7 +85,7 @@ export function ArtistCombobox({
                       disabled={isSelected}
                     >
                       {artist.name}
-                      {isSelected && <CheckIcon />}
+                      {isSelected && <S.CheckIcon />}
                     </CommandItem>
                   );
                 })}
@@ -127,17 +96,17 @@ export function ArtistCombobox({
                 {filteredArtists.length > 0 && <CommandSeparator />}
                 <CommandGroup>
                   <CommandItem value={`create-${search}`} onSelect={handleCreate} disabled={isCreating}>
-                    <CreateItemContent>
+                    <S.CreateItemContent>
                       <Plus size={16} />
                       Create "{search}"
-                    </CreateItemContent>
+                    </S.CreateItemContent>
                   </CommandItem>
                 </CommandGroup>
               </>
             )}
           </CommandList>
         </Command>
-      </StyledPopoverContent>
+      </S.StyledPopoverContent>
     </Popover>
   );
 }

@@ -194,3 +194,28 @@ export function DialogDescription(props: React.HTMLAttributes<HTMLParagraphEleme
 export function DialogFooter(props: React.HTMLAttributes<HTMLDivElement>) {
   return <StyledDialogFooter {...props} />;
 }
+
+const StyledScrollableDialogContent = styled(StyledDialogContent)`
+  max-width: 42rem;
+  max-height: 90vh;
+  overflow-y: auto;
+`;
+
+export function ScrollableDialogContent({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  const { open, onOpenChange } = useDialog();
+
+  if (!open) return null;
+
+  return (
+    <ContentWrapper>
+      <Overlay onClick={() => onOpenChange(false)} />
+      <StyledScrollableDialogContent {...props}>
+        {children}
+        <CloseButton onClick={() => onOpenChange(false)}>
+          <X size={16} />
+          <VisuallyHidden>Close</VisuallyHidden>
+        </CloseButton>
+      </StyledScrollableDialogContent>
+    </ContentWrapper>
+  );
+}

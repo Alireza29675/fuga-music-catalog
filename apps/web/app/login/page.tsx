@@ -4,63 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
-import { z } from 'zod';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { loginSchema, type LoginForm } from './login.schema';
+import * as S from './login.styles';
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Form, FormField, ErrorText, ErrorBox } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/use-auth';
-
-const loginSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(1, 'Password is required'),
-});
-
-type LoginForm = z.infer<typeof loginSchema>;
-
-const PageContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-  padding: ${({ theme }) => theme.spacing.md};
-`;
-
-const StyledCard = styled(Card)`
-  width: 100%;
-  max-width: 28rem;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.md};
-`;
-
-const FormField = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.sm};
-`;
-
-const ErrorText = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.colors.error};
-`;
-
-const ErrorBox = styled.div`
-  padding: ${({ theme }) => theme.spacing.md};
-  background-color: ${({ theme }) => theme.colors.errorBg};
-  color: ${({ theme }) => theme.colors.error};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  font-size: ${({ theme }) => theme.fontSize.sm};
-`;
-
-const FullWidthButton = styled(Button)`
-  width: 100%;
-`;
 
 export default function LoginPage() {
   const router = useRouter();
@@ -86,8 +36,8 @@ export default function LoginPage() {
   };
 
   return (
-    <PageContainer>
-      <StyledCard>
+    <S.PageContainer>
+      <S.StyledCard>
         <CardHeader>
           <CardTitle>Welcome to FUGA</CardTitle>
           <CardDescription>Sign in to manage your music catalog</CardDescription>
@@ -108,12 +58,12 @@ export default function LoginPage() {
 
             {error && <ErrorBox>{error}</ErrorBox>}
 
-            <FullWidthButton type="submit" disabled={isLoading}>
+            <S.FullWidthButton type="submit" disabled={isLoading}>
               {isLoading ? 'Signing in...' : 'Sign in'}
-            </FullWidthButton>
+            </S.FullWidthButton>
           </Form>
         </CardContent>
-      </StyledCard>
-    </PageContainer>
+      </S.StyledCard>
+    </S.PageContainer>
   );
 }
