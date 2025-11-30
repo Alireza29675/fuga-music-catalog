@@ -1,4 +1,4 @@
-import './env';
+import { env } from './env';
 import express from 'express';
 import cors from 'cors';
 import { errorHandler } from './middleware/error-handler';
@@ -9,7 +9,7 @@ import { coverArtRouter } from './routes/cover-art';
 import { productsRouter } from './routes/products';
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = env.PORT;
 
 app.use(cors());
 app.use(express.json());

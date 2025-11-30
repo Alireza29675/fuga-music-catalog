@@ -1,21 +1,15 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { randomUUID } from 'crypto';
 import { StorageProvider } from './types';
+import { env } from '../env';
 
 export class SupabaseStorageProvider implements StorageProvider {
   private client: SupabaseClient;
   private bucketName: string;
 
   constructor() {
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
-
-    if (!supabaseUrl || !supabaseServiceKey) {
-      throw new Error('SUPABASE_URL and SUPABASE_SERVICE_KEY must be configured');
-    }
-
-    this.client = createClient(supabaseUrl, supabaseServiceKey);
-    this.bucketName = process.env.SUPABASE_BUCKET_NAME || 'cover-art';
+    this.client = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_KEY);
+    this.bucketName = env.SUPABASE_BUCKET_NAME;
   }
 
   async upload(

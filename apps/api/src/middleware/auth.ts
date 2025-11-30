@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import type { AuthPayload, PermissionKey } from '@fuga-catalog/types';
 import { AppError } from '../lib/errors';
+import { env } from '../env';
 
 declare global {
   namespace Express {
@@ -11,7 +12,7 @@ declare global {
   }
 }
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-production';
+const JWT_SECRET = env.JWT_SECRET;
 const BEARER_PREFIX = 'Bearer ';
 
 export function authenticate(req: Request, _res: Response, next: NextFunction) {

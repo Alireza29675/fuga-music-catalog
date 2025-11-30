@@ -2,14 +2,11 @@ import { PrismaClient } from '../src/generated/prisma/client';
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 import bcrypt from 'bcryptjs';
-import { config } from 'dotenv';
-import { resolve } from 'path';
 import { PERMISSIONS } from '@fuga-catalog/constants';
 import { PermissionKey } from '@fuga-catalog/types';
+import { env } from '../src/env';
 
-config({ path: resolve(__dirname, '../../../.env') });
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({ connectionString: env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
@@ -54,8 +51,8 @@ const CONTRIBUTION_TYPES = [
 async function main() {
   console.log('Starting database seed...');
 
-  const adminEmail = process.env.ADMIN_EMAIL || 'admin@fuga.com';
-  const adminPassword = process.env.ADMIN_INIT_PASSWORD?.trim();
+  const adminEmail = env.ADMIN_EMAIL;
+  const adminPassword = env.ADMIN_INIT_PASSWORD?.trim();
 
   if (!adminPassword) {
     throw new Error(
