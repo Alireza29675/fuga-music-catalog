@@ -10,11 +10,12 @@ module.exports = {
     '!src/**/*.d.ts',
     '!src/generated/**',
     '!src/index.ts',
+    '!src/env.ts',
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFiles: ['<rootDir>/src/test-setup.ts'],
   transform: {
     '^.+\\.ts$': ['ts-jest', {
       diagnostics: {

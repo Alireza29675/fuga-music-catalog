@@ -1,10 +1,6 @@
-import { config } from 'dotenv';
-import { resolve } from 'path';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { randomUUID } from 'crypto';
 import { StorageProvider } from './types';
-
-config({ path: resolve(__dirname, '../../../../.env') });
 
 export class SupabaseStorageProvider implements StorageProvider {
   private client: SupabaseClient;

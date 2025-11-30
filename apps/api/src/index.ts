@@ -1,8 +1,4 @@
-import { config } from 'dotenv';
-import { resolve } from 'path';
-
-config({ path: resolve(__dirname, '../../../.env') });
-
+import './env';
 import express from 'express';
 import cors from 'cors';
 import { errorHandler } from './middleware/error-handler';
