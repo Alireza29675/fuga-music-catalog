@@ -24,17 +24,14 @@ export async function POST(request: NextRequest) {
     });
 
     if (!response.ok) {
-      const error = await response.json() as ApiError;
+      const error = (await response.json()) as ApiError;
       return NextResponse.json(error, { status: response.status });
     }
 
-    const data = await response.json() as CoverArtUploadResponse;
+    const data = (await response.json()) as CoverArtUploadResponse;
     return NextResponse.json(data, { status: HTTP_STATUS.CREATED });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Internal server error';
-    return NextResponse.json(
-      { error: message },
-      { status: HTTP_STATUS.INTERNAL_SERVER_ERROR }
-    );
+    return NextResponse.json({ error: message }, { status: HTTP_STATUS.INTERNAL_SERVER_ERROR });
   }
 }

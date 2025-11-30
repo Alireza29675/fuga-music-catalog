@@ -55,10 +55,7 @@ async function main() {
   const adminPassword = env.ADMIN_INIT_PASSWORD?.trim();
 
   if (!adminPassword) {
-    throw new Error(
-      'ADMIN_INIT_PASSWORD environment variable is required. ' +
-      'Please set it in your .env file.'
-    );
+    throw new Error('ADMIN_INIT_PASSWORD environment variable is required. ' + 'Please set it in your .env file.');
   }
 
   const passwordHash = await bcrypt.hash(adminPassword, 10);

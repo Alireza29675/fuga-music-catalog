@@ -20,9 +20,7 @@ const customJestConfig = {
     '!**/node_modules/**',
     '!**/.next/**',
   ],
-  testMatch: [
-    '**/*.{test,spec}.{js,jsx,ts,tsx}',
-  ],
+  testMatch: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
 };
 
 module.exports = createJestConfig(customJestConfig);

@@ -63,10 +63,7 @@ describe('PermissionGuard', () => {
     });
 
     render(
-      <PermissionGuard
-        permission={PERMISSIONS.PRODUCT_CREATE}
-        fallback={<div>No Permission</div>}
-      >
+      <PermissionGuard permission={PERMISSIONS.PRODUCT_CREATE} fallback={<div>No Permission</div>}>
         <div>Protected Content</div>
       </PermissionGuard>
     );
@@ -92,9 +89,7 @@ describe('AnyPermissionGuard', () => {
     });
 
     render(
-      <AnyPermissionGuard
-        permissions={[PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT]}
-      >
+      <AnyPermissionGuard permissions={[PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT]}>
         <div>Protected Content</div>
       </AnyPermissionGuard>
     );
@@ -113,9 +108,7 @@ describe('AnyPermissionGuard', () => {
     });
 
     render(
-      <AnyPermissionGuard
-        permissions={[PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT]}
-      >
+      <AnyPermissionGuard permissions={[PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT]}>
         <div>Protected Content</div>
       </AnyPermissionGuard>
     );
@@ -163,9 +156,7 @@ describe('AllPermissionsGuard', () => {
     });
 
     render(
-      <AllPermissionsGuard
-        permissions={[PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT]}
-      >
+      <AllPermissionsGuard permissions={[PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT]}>
         <div>Protected Content</div>
       </AllPermissionsGuard>
     );
@@ -184,9 +175,7 @@ describe('AllPermissionsGuard', () => {
     });
 
     render(
-      <AllPermissionsGuard
-        permissions={[PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT]}
-      >
+      <AllPermissionsGuard permissions={[PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT]}>
         <div>Protected Content</div>
       </AllPermissionsGuard>
     );

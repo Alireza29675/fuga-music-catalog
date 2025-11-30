@@ -17,11 +17,7 @@ const upload = multer({
     if (allowedFormats.includes(file.mimetype as any)) {
       cb(null, true);
     } else {
-      cb(new AppError(
-        `Invalid file type. Allowed: ${allowedFormats.join(', ')}`,
-        400,
-        ERROR_CODES.INVALID_FILE_TYPE
-      ));
+      cb(new AppError(`Invalid file type. Allowed: ${allowedFormats.join(', ')}`, 400, ERROR_CODES.INVALID_FILE_TYPE));
     }
   },
 });
@@ -37,11 +33,7 @@ coverArtRouter.post(
       if (!req.file) {
         throw new AppError('No file uploaded', 400, 'MISSING_FILE');
       }
-      const result = await coverArtService.upload(
-        req.file.buffer,
-        req.file.mimetype,
-        req.user!.userId
-      );
+      const result = await coverArtService.upload(req.file.buffer, req.file.mimetype, req.user!.userId);
       res.status(201).json(result);
     } catch (error) {
       next(error);

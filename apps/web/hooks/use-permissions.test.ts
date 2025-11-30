@@ -84,9 +84,7 @@ describe('usePermissions', () => {
 
       const { result } = renderHook(() => usePermissions());
 
-      expect(
-        result.current.hasAnyPermission([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT])
-      ).toBe(true);
+      expect(result.current.hasAnyPermission([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT])).toBe(true);
     });
 
     it('should return false when user has none of the permissions', () => {
@@ -105,9 +103,7 @@ describe('usePermissions', () => {
 
       const { result } = renderHook(() => usePermissions());
 
-      expect(
-        result.current.hasAnyPermission([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT])
-      ).toBe(false);
+      expect(result.current.hasAnyPermission([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_EDIT])).toBe(false);
     });
 
     it('should return false when user is not logged in', () => {
@@ -121,9 +117,7 @@ describe('usePermissions', () => {
 
       const { result } = renderHook(() => usePermissions());
 
-      expect(
-        result.current.hasAnyPermission([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_VIEW])
-      ).toBe(false);
+      expect(result.current.hasAnyPermission([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_VIEW])).toBe(false);
     });
   });
 
@@ -134,11 +128,7 @@ describe('usePermissions', () => {
           id: 1,
           email: 'test@example.com',
           roles: ['admin'],
-          permissions: [
-            PERMISSIONS.PRODUCT_CREATE,
-            PERMISSIONS.PRODUCT_VIEW,
-            PERMISSIONS.PRODUCT_EDIT,
-          ],
+          permissions: [PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_VIEW, PERMISSIONS.PRODUCT_EDIT],
         },
         isAuthenticated: true,
         isLoading: false,
@@ -148,9 +138,7 @@ describe('usePermissions', () => {
 
       const { result } = renderHook(() => usePermissions());
 
-      expect(
-        result.current.hasAllPermissions([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_VIEW])
-      ).toBe(true);
+      expect(result.current.hasAllPermissions([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_VIEW])).toBe(true);
     });
 
     it('should return false when user is missing at least one permission', () => {
@@ -169,9 +157,7 @@ describe('usePermissions', () => {
 
       const { result } = renderHook(() => usePermissions());
 
-      expect(
-        result.current.hasAllPermissions([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_VIEW])
-      ).toBe(false);
+      expect(result.current.hasAllPermissions([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_VIEW])).toBe(false);
     });
 
     it('should return false when user is not logged in', () => {
@@ -185,9 +171,7 @@ describe('usePermissions', () => {
 
       const { result } = renderHook(() => usePermissions());
 
-      expect(
-        result.current.hasAllPermissions([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_VIEW])
-      ).toBe(false);
+      expect(result.current.hasAllPermissions([PERMISSIONS.PRODUCT_CREATE, PERMISSIONS.PRODUCT_VIEW])).toBe(false);
     });
   });
 

@@ -9,9 +9,6 @@ export async function GET() {
     return NextResponse.json(data, { status: HTTP_STATUS.OK });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Internal server error';
-    return NextResponse.json(
-      { error: message },
-      { status: HTTP_STATUS.INTERNAL_SERVER_ERROR }
-    );
+    return NextResponse.json({ error: message }, { status: HTTP_STATUS.INTERNAL_SERVER_ERROR });
   }
 }

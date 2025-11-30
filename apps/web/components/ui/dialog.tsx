@@ -133,11 +133,7 @@ export function Dialog({
   onOpenChange: (open: boolean) => void;
   children: React.ReactNode;
 }) {
-  return (
-    <DialogContext.Provider value={{ open, onOpenChange }}>
-      {children}
-    </DialogContext.Provider>
-  );
+  return <DialogContext.Provider value={{ open, onOpenChange }}>{children}</DialogContext.Provider>;
 }
 
 export function DialogTrigger({
@@ -164,10 +160,7 @@ export function DialogTrigger({
   );
 }
 
-export function DialogContent({
-  children,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+export function DialogContent({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const { open, onOpenChange } = useDialog();
 
   if (!open) return null;

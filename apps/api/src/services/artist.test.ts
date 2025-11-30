@@ -61,9 +61,7 @@ describe('ArtistService', () => {
     it('should limit results to 50 artists', async () => {
       await service.search('test');
 
-      expect(prisma.artist.findMany).toHaveBeenCalledWith(
-        expect.objectContaining({ take: 50 })
-      );
+      expect(prisma.artist.findMany).toHaveBeenCalledWith(expect.objectContaining({ take: 50 }));
     });
   });
 

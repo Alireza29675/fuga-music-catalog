@@ -46,10 +46,8 @@ const StyledInput = styled.input`
   }
 `;
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ type = 'text', ...props }, ref) => {
-    return <StyledInput ref={ref} type={type} {...props} />;
-  }
-);
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ type = 'text', ...props }, ref) => {
+  return <StyledInput ref={ref} type={type} {...props} />;
+});
 
 Input.displayName = 'Input';

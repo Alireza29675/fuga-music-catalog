@@ -113,7 +113,9 @@ export class CoverArtService {
           console.error(`[CoverArtService] Failed to delete cover art ${coverArt.id}:`, error);
         }
       } else {
-        console.warn(`[CoverArtService] Found a cover art ${coverArt.id} that is no longer orphaned, but had deletion mark! Clearing deletion mark...`);
+        console.warn(
+          `[CoverArtService] Found a cover art ${coverArt.id} that is no longer orphaned, but had deletion mark! Clearing deletion mark...`
+        );
         await this.clearDeletionMark(coverArt.id);
       }
     }

@@ -82,9 +82,7 @@ export function useUploadCoverArt() {
 export function useArtists(query?: string) {
   return useQuery<GetArtistsResponse>({
     queryKey: ['artists', query],
-    queryFn: () => apiFetch<GetArtistsResponse>(
-      query ? `/artists?query=${encodeURIComponent(query)}` : '/artists'
-    ),
+    queryFn: () => apiFetch<GetArtistsResponse>(query ? `/artists?query=${encodeURIComponent(query)}` : '/artists'),
   });
 }
 

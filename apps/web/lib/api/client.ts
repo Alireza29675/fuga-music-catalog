@@ -3,10 +3,7 @@
  */
 import type { ApiError, CoverArtUploadResponse } from '@fuga-catalog/types';
 
-export async function apiFetch<T>(
-  path: string,
-  options: RequestInit = {}
-): Promise<T> {
+export async function apiFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
   const res = await fetch(`/api${path}`, {
     ...options,
     headers: {
@@ -17,7 +14,7 @@ export async function apiFetch<T>(
   });
 
   if (!res.ok) {
-    const error = await res.json().catch(() => ({ error: 'Request failed' })) as ApiError;
+    const error = (await res.json().catch(() => ({ error: 'Request failed' }))) as ApiError;
     throw new Error(error.error || 'Request failed');
   }
 
@@ -39,7 +36,7 @@ export async function uploadFile(path: string, file: File): Promise<CoverArtUplo
   });
 
   if (!res.ok) {
-    const error = await res.json().catch(() => ({ error: 'Upload failed' })) as ApiError;
+    const error = (await res.json().catch(() => ({ error: 'Upload failed' }))) as ApiError;
     throw new Error(error.error || 'Upload failed');
   }
 

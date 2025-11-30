@@ -12,23 +12,22 @@ export class SupabaseStorageProvider implements StorageProvider {
     this.bucketName = env.SUPABASE_BUCKET_NAME;
   }
 
-  async upload(
-    buffer: Buffer,
-    filename: string,
-    contentType: string
-  ): Promise<{ url: string; path: string }> {
+  async upload(buffer: Buffer, filename: string, contentType: string): Promise<{ url: string; path: string }> {
     const fileExtension = filename.split('.').pop() || 'jpg';
     const uniqueFilename = `${randomUUID()}.${fileExtension}`;
     const path = `covers/${uniqueFilename}`;
 
-    console.log('Uploading to Supabase:', { bucket: this.bucketName, path, contentType, size: buffer.length });
+    console.log('Uploading to Supabase:', {
+      bucket: this.bucketName,
+      path,
+      contentType,
+      size: buffer.length,
+    });
 
-    const { data, error } = await this.client.storage
-      .from(this.bucketName)
-      .upload(path, buffer, {
-        contentType,
-        upsert: false,
-      });
+    const { data, error } = await this.client.storage.from(this.bucketName).upload(path, buffer, {
+      contentType,
+      upsert: false,
+    });
 
     if (error) {
       console.error('Supabase upload error:', error);
@@ -37,17 +36,15 @@ export class SupabaseStorageProvider implements StorageProvider {
 
     console.log('Upload successful:', data);
 
-    const { data: { publicUrl } } = this.client.storage
-      .from(this.bucketName)
-      .getPublicUrl(path);
+    const {
+      data: { publicUrl },
+    } = this.client.storage.from(this.bucketName).getPublicUrl(path);
 
     return { url: publicUrl, path };
   }
 
   async delete(path: string): Promise<void> {
-    const { error } = await this.client.storage
-      .from(this.bucketName)
-      .remove([path]);
+    const { error } = await this.client.storage.from(this.bucketName).remove([path]);
 
     if (error) {
       throw new Error(`Failed to delete file: ${error.message}`);

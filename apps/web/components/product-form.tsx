@@ -16,12 +16,14 @@ import type { Product, CreateProductInput } from '@fuga-catalog/types';
 const productFormSchema = z.object({
   name: z.string().min(1, 'Product name is required'),
   coverArtId: z.number().optional(),
-  contributors: z.array(
-    z.object({
-      artistId: z.number(),
-      contributionTypeId: z.coerce.number().optional(),
-    })
-  ).min(1, 'At least one artist is required'),
+  contributors: z
+    .array(
+      z.object({
+        artistId: z.number(),
+        contributionTypeId: z.coerce.number().optional(),
+      })
+    )
+    .min(1, 'At least one artist is required'),
 });
 
 type ProductFormData = z.infer<typeof productFormSchema>;
@@ -199,10 +201,11 @@ export function ProductForm({ product, onSubmit, onCancel, isLoading }: ProductF
     defaultValues: {
       name: product?.name || '',
       coverArtId: product?.coverArt?.id,
-      contributors: product?.productArtists?.map(pa => ({
-        artistId: pa.artist.id,
-        contributionTypeId: pa.contributionType?.id,
-      })) || [],
+      contributors:
+        product?.productArtists?.map((pa) => ({
+          artistId: pa.artist.id,
+          contributionTypeId: pa.contributionType?.id,
+        })) || [],
     },
   });
 
@@ -213,7 +216,7 @@ export function ProductForm({ product, onSubmit, onCancel, isLoading }: ProductF
 
   useEffect(() => {
     if (product) {
-      setSelectedArtists(product.productArtists.map(pa => pa.artist));
+      setSelectedArtists(product.productArtists.map((pa) => pa.artist));
     }
   }, [product]);
 
@@ -226,7 +229,7 @@ export function ProductForm({ product, onSubmit, onCancel, isLoading }: ProductF
   };
 
   const handleAddArtist = (artist: { id: number; name: string }) => {
-    if (!selectedArtists.find(a => a.id === artist.id)) {
+    if (!selectedArtists.find((a) => a.id === artist.id)) {
       setSelectedArtists([...selectedArtists, artist]);
       append({ artistId: artist.id });
     }
@@ -263,11 +266,12 @@ export function ProductForm({ product, onSubmit, onCancel, isLoading }: ProductF
       onSubmit({
         name: data.name,
         coverArtId,
-        contributors: data.contributors.map(c => ({
+        contributors: data.contributors.map((c) => ({
           artistId: c.artistId,
-          contributionTypeId: c.contributionTypeId && !isNaN(c.contributionTypeId) && c.contributionTypeId > 0
-            ? c.contributionTypeId
-            : undefined,
+          contributionTypeId:
+            c.contributionTypeId && !isNaN(c.contributionTypeId) && c.contributionTypeId > 0
+              ? c.contributionTypeId
+              : undefined,
         })),
       });
     } catch (error) {
@@ -281,12 +285,7 @@ export function ProductForm({ product, onSubmit, onCancel, isLoading }: ProductF
     <Form onSubmit={handleSubmit(handleFormSubmit)}>
       <FormField>
         <Label htmlFor="name">Product Name *</Label>
-        <Input
-          id="name"
-          {...register('name')}
-          placeholder="Album or Single Name"
-          disabled={isLoading}
-        />
+        <Input id="name" {...register('name')} placeholder="Album or Single Name" disabled={isLoading} />
         {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
       </FormField>
 
@@ -302,9 +301,7 @@ export function ProductForm({ product, onSubmit, onCancel, isLoading }: ProductF
             <UploadLabel htmlFor="cover">
               <UploadBox>
                 <Upload size={24} color="currentColor" />
-                <UploadText>
-                  {coverFile ? coverFile.name : 'Click to upload (JPEG, PNG, WebP)'}
-                </UploadText>
+                <UploadText>{coverFile ? coverFile.name : 'Click to upload (JPEG, PNG, WebP)'}</UploadText>
               </UploadBox>
               <HiddenInput
                 id="cover"
@@ -335,10 +332,7 @@ export function ProductForm({ product, onSubmit, onCancel, isLoading }: ProductF
               {fields.map((field, index) => (
                 <ArtistRow key={field.id}>
                   <FlexInput value={selectedArtists[index]?.name || ''} disabled />
-                  <Select
-                    {...register(`contributors.${index}.contributionTypeId` as const)}
-                    disabled={isLoading}
-                  >
+                  <Select {...register(`contributors.${index}.contributionTypeId` as const)} disabled={isLoading}>
                     <option value="">Role (optional)</option>
                     {contributionTypes.map((type) => (
                       <option key={type.id} value={type.id}>
@@ -375,8 +369,10 @@ export function ProductForm({ product, onSubmit, onCancel, isLoading }: ProductF
               <SpinningIcon size={16} />
               {uploadCoverArt.isPending ? 'Uploading...' : 'Saving...'}
             </IconWithText>
+          ) : product ? (
+            'Update Product'
           ) : (
-            product ? 'Update Product' : 'Create Product'
+            'Create Product'
           )}
         </Button>
       </FormActions>

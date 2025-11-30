@@ -39,14 +39,14 @@ const StyledCardFooter = styled.div`
   padding-top: 0;
 `;
 
-export const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  (props, ref) => <StyledCard ref={ref} {...props} />
-);
+export const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((props, ref) => (
+  <StyledCard ref={ref} {...props} />
+));
 Card.displayName = 'Card';
 
-export const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  (props, ref) => <StyledCardHeader ref={ref} {...props} />
-);
+export const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((props, ref) => (
+  <StyledCardHeader ref={ref} {...props} />
+));
 CardHeader.displayName = 'CardHeader';
 
 export const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
@@ -54,18 +54,17 @@ export const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttribut
 );
 CardTitle.displayName = 'CardTitle';
 
-export const CardDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->((props, ref) => <StyledCardDescription ref={ref} {...props} />);
+export const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
+  (props, ref) => <StyledCardDescription ref={ref} {...props} />
+);
 CardDescription.displayName = 'CardDescription';
 
-export const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  (props, ref) => <StyledCardContent ref={ref} {...props} />
-);
+export const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((props, ref) => (
+  <StyledCardContent ref={ref} {...props} />
+));
 CardContent.displayName = 'CardContent';
 
-export const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  (props, ref) => <StyledCardFooter ref={ref} {...props} />
-);
+export const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>((props, ref) => (
+  <StyledCardFooter ref={ref} {...props} />
+));
 CardFooter.displayName = 'CardFooter';

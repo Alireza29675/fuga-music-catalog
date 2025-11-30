@@ -3,7 +3,15 @@
 import * as React from 'react';
 import { Check, Plus } from 'lucide-react';
 import styled from 'styled-components';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+} from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 
@@ -60,14 +68,10 @@ export function ArtistCombobox({
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
 
-  const hasExactMatch = artists.some(
-    (artist) => artist.name.toLowerCase() === search.toLowerCase()
-  );
+  const hasExactMatch = artists.some((artist) => artist.name.toLowerCase() === search.toLowerCase());
 
   const filteredArtists = search
-    ? artists.filter((artist) =>
-        artist.name.toLowerCase().includes(search.toLowerCase())
-      )
+    ? artists.filter((artist) => artist.name.toLowerCase().includes(search.toLowerCase()))
     : artists;
 
   const handleSelect = (artist: Artist) => {
@@ -87,29 +91,16 @@ export function ArtistCombobox({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <TriggerButton
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          disabled={disabled}
-        >
+        <TriggerButton variant="outline" role="combobox" aria-expanded={open} disabled={disabled}>
           Search or create artist...
         </TriggerButton>
       </PopoverTrigger>
       <StyledPopoverContent align="start">
         <Command shouldFilter={false}>
-          <CommandInput
-            placeholder="Search or create artist..."
-            value={search}
-            onValueChange={setSearch}
-          />
+          <CommandInput placeholder="Search or create artist..." value={search} onValueChange={setSearch} />
           <CommandList>
-            {isLoading && (
-              <CommandEmpty>Loading artists...</CommandEmpty>
-            )}
-            {!isLoading && filteredArtists.length === 0 && !search && (
-              <CommandEmpty>No artists found.</CommandEmpty>
-            )}
+            {isLoading && <CommandEmpty>Loading artists...</CommandEmpty>}
+            {!isLoading && filteredArtists.length === 0 && !search && <CommandEmpty>No artists found.</CommandEmpty>}
             {!isLoading && filteredArtists.length === 0 && search && !hasExactMatch && (
               <CommandEmpty>No artists found.</CommandEmpty>
             )}
@@ -135,11 +126,7 @@ export function ArtistCombobox({
               <>
                 {filteredArtists.length > 0 && <CommandSeparator />}
                 <CommandGroup>
-                  <CommandItem
-                    value={`create-${search}`}
-                    onSelect={handleCreate}
-                    disabled={isCreating}
-                  >
+                  <CommandItem value={`create-${search}`} onSelect={handleCreate} disabled={isCreating}>
                     <CreateItemContent>
                       <Plus size={16} />
                       Create "{search}"

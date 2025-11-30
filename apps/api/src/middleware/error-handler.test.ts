@@ -20,12 +20,7 @@ describe('Error Handler Middleware', () => {
   it('should handle AppError correctly', () => {
     const error = new AppError('Test error', 404, 'NOT_FOUND');
 
-    errorHandler(
-      error,
-      mockRequest as Request,
-      mockResponse as Response,
-      mockNext
-    );
+    errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
 
     expect(mockResponse.status).toHaveBeenCalledWith(404);
     expect(mockResponse.json).toHaveBeenCalledWith({
@@ -45,12 +40,7 @@ describe('Error Handler Middleware', () => {
       },
     ]);
 
-    errorHandler(
-      zodError,
-      mockRequest as Request,
-      mockResponse as Response,
-      mockNext
-    );
+    errorHandler(zodError, mockRequest as Request, mockResponse as Response, mockNext);
 
     expect(mockResponse.status).toHaveBeenCalledWith(400);
     expect(mockResponse.json).toHaveBeenCalledWith({
@@ -63,12 +53,7 @@ describe('Error Handler Middleware', () => {
     const error = new Error('Unknown error');
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
-    errorHandler(
-      error,
-      mockRequest as Request,
-      mockResponse as Response,
-      mockNext
-    );
+    errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
 
     expect(mockResponse.status).toHaveBeenCalledWith(500);
     expect(mockResponse.json).toHaveBeenCalledWith({
@@ -82,12 +67,7 @@ describe('Error Handler Middleware', () => {
   it('should handle AppError with default values', () => {
     const error = new AppError('Default error');
 
-    errorHandler(
-      error,
-      mockRequest as Request,
-      mockResponse as Response,
-      mockNext
-    );
+    errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
 
     expect(mockResponse.status).toHaveBeenCalledWith(500);
     expect(mockResponse.json).toHaveBeenCalledWith({

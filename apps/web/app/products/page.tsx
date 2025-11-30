@@ -6,7 +6,14 @@ import { Plus, Pencil, Trash2, Loader2, LogOut } from 'lucide-react';
 import styled, { keyframes } from 'styled-components';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from '@/components/ui/dialog';
 import { ProductForm } from '@/components/product-form';
 import { useProducts, useCreateProduct, useUpdateProduct, useDeleteProduct } from '@/hooks/use-products';
 import { useAuth } from '@/hooks/use-auth';
@@ -262,18 +269,11 @@ export default function ProductsPage() {
               <ProductCard key={product.id}>
                 <CardHeader style={{ padding: 0 }}>
                   <CoverArtContainer>
-                    {product.coverArt && (
-                      <img
-                        src={product.coverArt.resourceUri}
-                        alt={product.name}
-                      />
-                    )}
+                    {product.coverArt && <img src={product.coverArt.resourceUri} alt={product.name} />}
                   </CoverArtContainer>
                 </CardHeader>
                 <ProductInfo>
-                  <CardTitle style={{ fontSize: '1.125rem', marginBottom: '0.5rem' }}>
-                    {product.name}
-                  </CardTitle>
+                  <CardTitle style={{ fontSize: '1.125rem', marginBottom: '0.5rem' }}>{product.name}</CardTitle>
                   <ArtistList>
                     {product.productArtists.map((pa, index) => (
                       <ArtistText key={index}>
@@ -285,11 +285,7 @@ export default function ProductsPage() {
                 </ProductInfo>
                 <ActionButtons>
                   <PermissionGuard permission={PERMISSIONS.PRODUCT_EDIT}>
-                    <FlexButton
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setEditingProduct(product)}
-                    >
+                    <FlexButton variant="outline" size="sm" onClick={() => setEditingProduct(product)}>
                       <ButtonIcon>
                         <Pencil size={16} />
                         Edit
@@ -297,11 +293,7 @@ export default function ProductsPage() {
                     </FlexButton>
                   </PermissionGuard>
                   <PermissionGuard permission={PERMISSIONS.PRODUCT_EDIT}>
-                    <FlexButton
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setDeletingProduct(product)}
-                    >
+                    <FlexButton variant="outline" size="sm" onClick={() => setDeletingProduct(product)}>
                       <ButtonIcon>
                         <Trash2 size={16} />
                         Delete
@@ -319,9 +311,7 @@ export default function ProductsPage() {
         <ScrollableDialogContent>
           <DialogHeader>
             <DialogTitle>Create New Product</DialogTitle>
-            <DialogDescription>
-              Add a new music product to your catalog
-            </DialogDescription>
+            <DialogDescription>Add a new music product to your catalog</DialogDescription>
           </DialogHeader>
           <ProductForm
             onSubmit={handleCreateProduct}
@@ -335,9 +325,7 @@ export default function ProductsPage() {
         <ScrollableDialogContent>
           <DialogHeader>
             <DialogTitle>Edit Product</DialogTitle>
-            <DialogDescription>
-              Update product information
-            </DialogDescription>
+            <DialogDescription>Update product information</DialogDescription>
           </DialogHeader>
           {editingProduct && (
             <ProductForm
@@ -362,11 +350,7 @@ export default function ProductsPage() {
             <Button variant="outline" onClick={() => setDeletingProduct(null)}>
               Cancel
             </Button>
-            <Button
-              variant="destructive"
-              onClick={handleDeleteProduct}
-              disabled={deleteProduct.isPending}
-            >
+            <Button variant="destructive" onClick={handleDeleteProduct} disabled={deleteProduct.isPending}>
               {deleteProduct.isPending ? (
                 <ButtonIcon>
                   <SpinningIcon size={16} />

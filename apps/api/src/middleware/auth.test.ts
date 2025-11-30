@@ -31,38 +31,26 @@ describe('Auth Middleware', () => {
         authorization: `Bearer ${token}`,
       };
 
-      authenticate(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      authenticate(mockRequest as Request, mockResponse as Response, mockNext);
 
-      expect(mockRequest.user).toEqual(expect.objectContaining({
-        userId: 1,
-        roles: ['admin'],
-        permissions: ['product:create'],
-      }));
+      expect(mockRequest.user).toEqual(
+        expect.objectContaining({
+          userId: 1,
+          roles: ['admin'],
+          permissions: ['product:create'],
+        })
+      );
       expect(mockNext).toHaveBeenCalled();
     });
 
     it('should reject missing authorization header', () => {
       mockRequest.headers = {};
 
-      expect(() =>
-        authenticate(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow(AppError);
+      expect(() => authenticate(mockRequest as Request, mockResponse as Response, mockNext)).toThrow(AppError);
 
-      expect(() =>
-        authenticate(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow('Missing or invalid authorization header');
+      expect(() => authenticate(mockRequest as Request, mockResponse as Response, mockNext)).toThrow(
+        'Missing or invalid authorization header'
+      );
     });
 
     it('should reject invalid authorization format', () => {
@@ -70,13 +58,7 @@ describe('Auth Middleware', () => {
         authorization: 'InvalidFormat token',
       };
 
-      expect(() =>
-        authenticate(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow(AppError);
+      expect(() => authenticate(mockRequest as Request, mockResponse as Response, mockNext)).toThrow(AppError);
     });
 
     it('should reject invalid token', () => {
@@ -84,21 +66,11 @@ describe('Auth Middleware', () => {
         authorization: 'Bearer invalid-token',
       };
 
-      expect(() =>
-        authenticate(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow(AppError);
+      expect(() => authenticate(mockRequest as Request, mockResponse as Response, mockNext)).toThrow(AppError);
 
-      expect(() =>
-        authenticate(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow('Invalid or expired token');
+      expect(() => authenticate(mockRequest as Request, mockResponse as Response, mockNext)).toThrow(
+        'Invalid or expired token'
+      );
     });
 
     it('should reject expired token', () => {
@@ -114,13 +86,7 @@ describe('Auth Middleware', () => {
         authorization: `Bearer ${token}`,
       };
 
-      expect(() =>
-        authenticate(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow(AppError);
+      expect(() => authenticate(mockRequest as Request, mockResponse as Response, mockNext)).toThrow(AppError);
     });
   });
 
@@ -133,11 +99,7 @@ describe('Auth Middleware', () => {
       };
 
       const middleware = requirePermission('product:create' as any);
-      middleware(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      middleware(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalled();
     });
@@ -147,21 +109,9 @@ describe('Auth Middleware', () => {
 
       const middleware = requirePermission('product:create' as any);
 
-      expect(() =>
-        middleware(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow(AppError);
+      expect(() => middleware(mockRequest as Request, mockResponse as Response, mockNext)).toThrow(AppError);
 
-      expect(() =>
-        middleware(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow('Not authenticated');
+      expect(() => middleware(mockRequest as Request, mockResponse as Response, mockNext)).toThrow('Not authenticated');
     });
 
     it('should reject request without required permission', () => {
@@ -173,21 +123,11 @@ describe('Auth Middleware', () => {
 
       const middleware = requirePermission('product:create' as any);
 
-      expect(() =>
-        middleware(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow(AppError);
+      expect(() => middleware(mockRequest as Request, mockResponse as Response, mockNext)).toThrow(AppError);
 
-      expect(() =>
-        middleware(
-          mockRequest as Request,
-          mockResponse as Response,
-          mockNext
-        )
-      ).toThrow('Insufficient permissions');
+      expect(() => middleware(mockRequest as Request, mockResponse as Response, mockNext)).toThrow(
+        'Insufficient permissions'
+      );
     });
 
     it('should handle multiple permissions correctly', () => {
@@ -198,11 +138,7 @@ describe('Auth Middleware', () => {
       };
 
       const middleware = requirePermission('product:update' as any);
-      middleware(
-        mockRequest as Request,
-        mockResponse as Response,
-        mockNext
-      );
+      middleware(mockRequest as Request, mockResponse as Response, mockNext);
 
       expect(mockNext).toHaveBeenCalled();
     });

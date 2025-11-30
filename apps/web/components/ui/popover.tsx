@@ -1,15 +1,15 @@
-"use client"
+'use client';
 
 // Generated via Shadcn/UI
-import * as React from "react"
-import * as PopoverPrimitive from "@radix-ui/react-popover"
-import styled from "styled-components"
+import * as React from 'react';
+import * as PopoverPrimitive from '@radix-ui/react-popover';
+import styled from 'styled-components';
 
-const Popover = PopoverPrimitive.Root
+const Popover = PopoverPrimitive.Root;
 
-const PopoverTrigger = PopoverPrimitive.Trigger
+const PopoverTrigger = PopoverPrimitive.Trigger;
 
-const PopoverAnchor = PopoverPrimitive.Anchor
+const PopoverAnchor = PopoverPrimitive.Anchor;
 
 const StyledPopoverContent = styled(PopoverPrimitive.Content)`
   z-index: 100;
@@ -19,15 +19,16 @@ const StyledPopoverContent = styled(PopoverPrimitive.Content)`
   border: 1px solid ${({ theme }) => theme.colors.border};
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
   outline: none;
 
-  &[data-state="open"] {
+  &[data-state='open'] {
     animation: fadeIn 150ms ease-out;
   }
 
-  &[data-state="closed"] {
+  &[data-state='closed'] {
     animation: fadeOut 150ms ease-in;
   }
 
@@ -52,22 +53,16 @@ const StyledPopoverContent = styled(PopoverPrimitive.Content)`
       transform: scale(0.95);
     }
   }
-`
+`;
 
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->(({ align = "center", sideOffset = 4, ...props }, ref) => (
+>(({ align = 'center', sideOffset = 4, ...props }, ref) => (
   <PopoverPrimitive.Portal>
-    <StyledPopoverContent
-      ref={ref}
-      align={align}
-      sideOffset={sideOffset}
-      {...props}
-    />
+    <StyledPopoverContent ref={ref} align={align} sideOffset={sideOffset} {...props} />
   </PopoverPrimitive.Portal>
-))
-PopoverContent.displayName = PopoverPrimitive.Content.displayName
+));
+PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor }
-
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };

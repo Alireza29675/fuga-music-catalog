@@ -1,9 +1,9 @@
-"use client"
+'use client';
 
 // Generated via Shadcn/UI
-import * as React from "react"
-import { Command as CommandPrimitive } from "cmdk"
-import styled from "styled-components"
+import * as React from 'react';
+import { Command as CommandPrimitive } from 'cmdk';
+import styled from 'styled-components';
 
 const StyledCommand = styled(CommandPrimitive)`
   display: flex;
@@ -13,7 +13,7 @@ const StyledCommand = styled(CommandPrimitive)`
   overflow: hidden;
   border-radius: ${({ theme }) => theme.borderRadius.md};
   background-color: ${({ theme }) => theme.colors.background};
-`
+`;
 
 const StyledCommandInput = styled(CommandPrimitive.Input)`
   display: flex;
@@ -36,21 +36,21 @@ const StyledCommandInput = styled(CommandPrimitive.Input)`
     cursor: not-allowed;
     opacity: 0.5;
   }
-`
+`;
 
 const StyledCommandList = styled(CommandPrimitive.List)`
   max-height: 18rem;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 0.25rem;
-`
+`;
 
 const StyledCommandEmpty = styled(CommandPrimitive.Empty)`
   padding: 1.5rem 0.5rem;
   text-align: center;
   font-size: ${({ theme }) => theme.fontSize.sm};
   color: ${({ theme }) => theme.colors.textSecondary};
-`
+`;
 
 const StyledCommandGroup = styled(CommandPrimitive.Group)`
   overflow: hidden;
@@ -63,13 +63,13 @@ const StyledCommandGroup = styled(CommandPrimitive.Group)`
     font-weight: ${({ theme }) => theme.fontWeight.medium};
     color: ${({ theme }) => theme.colors.textSecondary};
   }
-`
+`;
 
 const StyledCommandSeparator = styled(CommandPrimitive.Separator)`
   height: 1px;
   background-color: ${({ theme }) => theme.colors.border};
   margin: 0.25rem -0.25rem;
-`
+`;
 
 const StyledCommandItem = styled(CommandPrimitive.Item)`
   position: relative;
@@ -83,79 +83,56 @@ const StyledCommandItem = styled(CommandPrimitive.Item)`
   user-select: none;
   transition: all ${({ theme }) => theme.transitions.fast};
 
-  &[aria-selected="true"] {
+  &[aria-selected='true'] {
     background-color: ${({ theme }) => theme.colors.backgroundSecondary};
   }
 
-  &[aria-disabled="true"] {
+  &[aria-disabled='true'] {
     pointer-events: none;
     opacity: 0.5;
   }
-`
+`;
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive>
->(({ ...props }, ref) => (
-  <StyledCommand ref={ref} {...props} />
-))
-Command.displayName = CommandPrimitive.displayName
+>(({ ...props }, ref) => <StyledCommand ref={ref} {...props} />);
+Command.displayName = CommandPrimitive.displayName;
 
 const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ ...props }, ref) => (
-  <StyledCommandInput ref={ref} {...props} />
-))
-CommandInput.displayName = CommandPrimitive.Input.displayName
+>(({ ...props }, ref) => <StyledCommandInput ref={ref} {...props} />);
+CommandInput.displayName = CommandPrimitive.Input.displayName;
 
 const CommandList = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>
->(({ ...props }, ref) => (
-  <StyledCommandList ref={ref} {...props} />
-))
-CommandList.displayName = CommandPrimitive.List.displayName
+>(({ ...props }, ref) => <StyledCommandList ref={ref} {...props} />);
+CommandList.displayName = CommandPrimitive.List.displayName;
 
 const CommandEmpty = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Empty>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
->((props, ref) => (
-  <StyledCommandEmpty ref={ref} {...props} />
-))
-CommandEmpty.displayName = CommandPrimitive.Empty.displayName
+>((props, ref) => <StyledCommandEmpty ref={ref} {...props} />);
+CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 
 const CommandGroup = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Group>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>
->(({ ...props }, ref) => (
-  <StyledCommandGroup ref={ref} {...props} />
-))
-CommandGroup.displayName = CommandPrimitive.Group.displayName
+>(({ ...props }, ref) => <StyledCommandGroup ref={ref} {...props} />);
+CommandGroup.displayName = CommandPrimitive.Group.displayName;
 
 const CommandSeparator = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
->(({ ...props }, ref) => (
-  <StyledCommandSeparator ref={ref} {...props} />
-))
-CommandSeparator.displayName = CommandPrimitive.Separator.displayName
+>(({ ...props }, ref) => <StyledCommandSeparator ref={ref} {...props} />);
+CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 
 const CommandItem = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
->(({ ...props }, ref) => (
-  <StyledCommandItem ref={ref} {...props} />
-))
-CommandItem.displayName = CommandPrimitive.Item.displayName
+>(({ ...props }, ref) => <StyledCommandItem ref={ref} {...props} />);
+CommandItem.displayName = CommandPrimitive.Item.displayName;
 
-export {
-  Command,
-  CommandInput,
-  CommandList,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandSeparator,
-}
-
+export { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandSeparator };

@@ -167,9 +167,7 @@ describe('ProductService', () => {
     it('should throw error for missing cover art', async () => {
       const invalidInput = { ...validInput, coverArtId: 0 };
 
-      await expect(service.create(invalidInput as any, 1)).rejects.toThrow(
-        AppError
-      );
+      await expect(service.create(invalidInput as any, 1)).rejects.toThrow(AppError);
     });
 
     it('should throw error for no contributors', async () => {

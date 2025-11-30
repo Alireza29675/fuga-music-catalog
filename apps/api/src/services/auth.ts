@@ -20,7 +20,7 @@ const PERMISSIONS_INCLUDE = {
       },
     },
   },
-}
+};
 
 export class AuthService {
   async login(email: string, password: string): Promise<LoginApiResponse> {
@@ -40,18 +40,10 @@ export class AuthService {
 
     const roles = user.userRoles.map((ur) => ur.role.name);
     const permissions = [
-      ...new Set(
-        user.userRoles.flatMap((ur) =>
-          ur.role.rolePermissions.map((rp) => rp.permission.key)
-        )
-      ),
+      ...new Set(user.userRoles.flatMap((ur) => ur.role.rolePermissions.map((rp) => rp.permission.key))),
     ];
 
-    const token = jwt.sign(
-      { userId: user.id, roles, permissions },
-      JWT_SECRET,
-      { expiresIn: JWT_EXPIRES_IN }
-    );
+    const token = jwt.sign({ userId: user.id, roles, permissions }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
     await prisma.user.update({
       where: { id: user.id },

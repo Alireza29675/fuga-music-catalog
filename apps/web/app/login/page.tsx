@@ -96,24 +96,13 @@ export default function LoginPage() {
           <Form onSubmit={handleSubmit(onSubmit)}>
             <FormField>
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="admin@fuga.com"
-                {...register('email')}
-                disabled={isLoading}
-              />
+              <Input id="email" type="email" placeholder="admin@fuga.com" {...register('email')} disabled={isLoading} />
               {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
             </FormField>
 
             <FormField>
               <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                {...register('password')}
-                disabled={isLoading}
-              />
+              <Input id="password" type="password" {...register('password')} disabled={isLoading} />
               {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
             </FormField>
 

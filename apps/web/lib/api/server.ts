@@ -6,15 +6,12 @@ import type { ApiError } from '@fuga-catalog/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
-export async function apiRequest(
-  path: string,
-  options: RequestInit = {}
-): Promise<Response> {
+export async function apiRequest(path: string, options: RequestInit = {}): Promise<Response> {
   const cookieStore = await cookies();
   const token = cookieStore.get('auth-token')?.value;
 
   const headers: Record<string, string> = {
-    ...(options.headers as Record<string, string> || {}),
+    ...((options.headers as Record<string, string>) || {}),
   };
 
   if (token) {
@@ -34,14 +31,11 @@ export async function apiRequest(
 /**
  * Type-safe API request that automatically parses JSON response
  */
-export async function apiRequestTyped<T>(
-  path: string,
-  options: RequestInit = {}
-): Promise<T> {
+export async function apiRequestTyped<T>(path: string, options: RequestInit = {}): Promise<T> {
   const response = await apiRequest(path, options);
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: 'Request failed' })) as ApiError;
+    const error = (await response.json().catch(() => ({ error: 'Request failed' }))) as ApiError;
     throw new Error(error.error || 'Request failed');
   }
 
@@ -55,7 +49,7 @@ export async function apiRequestTyped<T>(
 
 export async function handleApiError(response: Response): Promise<{ error: string; status: number } | null> {
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: 'Request failed' })) as ApiError;
+    const error = (await response.json().catch(() => ({ error: 'Request failed' }))) as ApiError;
     return {
       error: error.error || 'Request failed',
       status: response.status,

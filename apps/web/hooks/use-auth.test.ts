@@ -167,10 +167,7 @@ describe('useAuth', () => {
       await result.current.logout();
     });
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Logout failed:',
-      expect.any(Error)
-    );
+    expect(consoleErrorSpy).toHaveBeenCalledWith('Logout failed:', expect.any(Error));
 
     // State should NOT be cleared when logout fails
     expect(result.current.isAuthenticated).toBe(true);
@@ -204,5 +201,4 @@ describe('useAuth', () => {
     expect(parsedStored.state.isAuthenticated).toBe(true);
     expect(parsedStored.state.user).toEqual(mockUser);
   });
-
 });

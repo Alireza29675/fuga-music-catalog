@@ -52,10 +52,7 @@ describe('Validation Schemas', () => {
       const validProduct = {
         name: 'Test Album',
         coverArtId: 1,
-        contributors: [
-          { artistId: 1, contributionTypeId: 1 },
-          { artistId: 2 },
-        ],
+        contributors: [{ artistId: 1, contributionTypeId: 1 }, { artistId: 2 }],
       };
 
       const result = createProductSchema.safeParse(validProduct);
