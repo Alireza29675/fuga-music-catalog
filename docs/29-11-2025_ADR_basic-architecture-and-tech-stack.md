@@ -2,7 +2,9 @@
 
 - **Author:** Alireza Sheikholmolouki
 - **Date:** 29 November 2025
-- **Status:** Proposed
+- **Status:** Approved (29 November 2025 by _Alireza Sheikholmolouki_)
+- **References:**
+  - [PRD: Music Catalog Management](./29-11-2025_PRD_music-catalog-management.md)
 
 ## Context
 
