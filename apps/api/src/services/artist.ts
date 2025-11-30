@@ -1,6 +1,6 @@
-import { prisma } from '../lib/prisma';
-import { AppError } from '../lib/errors';
 import { ERROR_CODES } from '@fuga-catalog/constants';
+import { AppError } from '../lib/errors';
+import { prisma } from '../lib/prisma';
 
 export class ArtistService {
   async search(query?: string) {

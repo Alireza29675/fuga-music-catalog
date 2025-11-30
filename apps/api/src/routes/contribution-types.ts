@@ -1,7 +1,7 @@
-import { Router, type Router as ExpressRouter } from 'express';
-import { ContributionTypeService } from '../services/contribution-type';
-import { authenticate, requirePermission } from '../middleware/auth';
 import { PERMISSIONS } from '@fuga-catalog/constants';
+import { Router, type Router as ExpressRouter } from 'express';
+import { authenticate, requirePermission } from '../middleware/auth';
+import { ContributionTypeService } from '../services/contribution-type';
 
 export const contributionTypesRouter: ExpressRouter = Router();
 const contributionTypeService = new ContributionTypeService();

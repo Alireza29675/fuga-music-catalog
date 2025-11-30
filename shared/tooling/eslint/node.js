@@ -1,10 +1,6 @@
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
+import globals from 'globals';
 import baseConfig from './base.js';
 import noProcessEnvRule from './rules/no-process-env.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 /**
  * ESLint configuration for Node.js/Express applications (API)
@@ -18,26 +14,8 @@ export default [
     files: ['**/*.ts', '**/*.js'],
     languageOptions: {
       globals: {
-        // Node.js globals
-        console: 'readonly',
-        process: 'readonly',
-        Buffer: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        global: 'readonly',
-        module: 'readonly',
-        require: 'readonly',
-        exports: 'writable',
-        // Jest/Test globals
-        describe: 'readonly',
-        it: 'readonly',
-        test: 'readonly',
-        expect: 'readonly',
-        beforeEach: 'readonly',
-        afterEach: 'readonly',
-        beforeAll: 'readonly',
-        afterAll: 'readonly',
-        jest: 'readonly',
+        ...globals.node,
+        ...globals.jest,
       },
     },
     plugins: {

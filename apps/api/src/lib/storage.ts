@@ -1,7 +1,7 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { randomUUID } from 'crypto';
-import { StorageProvider } from './types';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { env } from '../env';
+import { StorageProvider } from './types';
 
 export class SupabaseStorageProvider implements StorageProvider {
   private client: SupabaseClient;

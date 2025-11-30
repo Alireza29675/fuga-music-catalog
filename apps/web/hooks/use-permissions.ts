@@ -1,5 +1,5 @@
-import { useAuth } from './use-auth';
 import type { PermissionKey } from '@fuga-catalog/types';
+import { useAuth } from './use-auth';
 
 export function usePermissions() {
   const { user } = useAuth();

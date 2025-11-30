@@ -1,10 +1,10 @@
-import { env } from './env';
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
+import { env } from './env';
 import { errorHandler } from './middleware/error-handler';
+import { artistsRouter } from './routes/artists';
 import { authRouter } from './routes/auth';
 import { contributionTypesRouter } from './routes/contribution-types';
-import { artistsRouter } from './routes/artists';
 import { coverArtRouter } from './routes/cover-art';
 import { productsRouter } from './routes/products';
 

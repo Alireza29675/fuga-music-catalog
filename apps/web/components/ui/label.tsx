@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}
+export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;
 
 const StyledLabel = styled.label`
   font-size: ${({ theme }) => theme.fontSize.sm};

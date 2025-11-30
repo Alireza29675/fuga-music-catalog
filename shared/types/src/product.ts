@@ -1,6 +1,6 @@
-import type { CoverArt } from './cover-art';
 import type { Artist } from './artist';
 import type { ContributionType } from './contribution-type';
+import type { CoverArt } from './cover-art';
 
 export interface ProductArtist {
   artist: Artist;

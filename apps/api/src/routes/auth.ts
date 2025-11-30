@@ -1,6 +1,6 @@
 import { Router, type Router as ExpressRouter } from 'express';
-import { AuthService } from '../services/auth';
 import { loginSchema } from '../lib/validation';
+import { AuthService } from '../services/auth';
 
 export const authRouter: ExpressRouter = Router();
 const authService = new AuthService();

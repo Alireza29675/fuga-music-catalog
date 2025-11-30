@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { HTTP_STATUS } from '@fuga-catalog/constants';
 import type { LoginInput, LoginApiResponse, ApiError } from '@fuga-catalog/types';
+import { NextRequest, NextResponse } from 'next/server';
+import { env } from '@/lib/env';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_URL = env.NEXT_PUBLIC_API_URL;
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     nextResponse.cookies.set('auth-token', data.token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: env.NODE_ENV === 'production',
       sameSite: 'lax',
       maxAge: 60 * 60 * 24,
       path: '/',

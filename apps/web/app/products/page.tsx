@@ -1,9 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { PERMISSIONS } from '@fuga-catalog/constants';
+import type { Product, CreateProductInput, UpdateProductInput } from '@fuga-catalog/types';
 import { Plus, Pencil, Trash2, Loader2, LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { PermissionGuard } from '@/components/permission-guard';
+import { ProductForm } from '@/components/product-form';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -14,13 +18,9 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog';
-import { ProductForm } from '@/components/product-form';
-import { useProducts, useCreateProduct, useUpdateProduct, useDeleteProduct } from '@/hooks/use-products';
-import { useAuth } from '@/hooks/use-auth';
 import { useToast } from '@/components/ui/toast';
-import { PermissionGuard } from '@/components/permission-guard';
-import type { Product, CreateProductInput, UpdateProductInput } from '@fuga-catalog/types';
-import { PERMISSIONS } from '@fuga-catalog/constants';
+import { useAuth } from '@/hooks/use-auth';
+import { useProducts, useCreateProduct, useUpdateProduct, useDeleteProduct } from '@/hooks/use-products';
 
 const spin = keyframes`
   from { transform: rotate(0deg); }

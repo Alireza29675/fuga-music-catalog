@@ -1,8 +1,8 @@
+import type { AuthPayload, PermissionKey } from '@fuga-catalog/types';
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import type { AuthPayload, PermissionKey } from '@fuga-catalog/types';
-import { AppError } from '../lib/errors';
 import { env } from '../env';
+import { AppError } from '../lib/errors';
 
 const JWT_SECRET = env.JWT_SECRET;
 const BEARER_PREFIX = 'Bearer ';

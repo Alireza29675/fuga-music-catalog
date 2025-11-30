@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { ZodError } from 'zod';
-import { errorHandler } from './error-handler';
 import { AppError } from '../lib/errors';
+import { errorHandler } from './error-handler';
 
 describe('Error Handler Middleware', () => {
   let mockRequest: Partial<Request>;

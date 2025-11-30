@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
+import { PERMISSIONS } from '@fuga-catalog/constants';
 import { render, screen } from '@testing-library/react';
 import { PermissionGuard, AnyPermissionGuard, AllPermissionsGuard } from './permission-guard';
 import { usePermissions } from '@/hooks/use-permissions';
-import { PERMISSIONS } from '@fuga-catalog/constants';
 
 // Mock the usePermissions hook
 jest.mock('../hooks/use-permissions');

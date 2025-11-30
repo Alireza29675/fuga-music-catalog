@@ -1,8 +1,8 @@
 'use client';
 
-import { usePermissions } from '@/hooks/use-permissions';
 import type { PermissionKey } from '@fuga-catalog/types';
 import { ReactNode } from 'react';
+import { usePermissions } from '@/hooks/use-permissions';
 
 interface PermissionGuardProps {
   permission: PermissionKey;

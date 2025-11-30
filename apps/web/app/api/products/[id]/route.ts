@@ -1,5 +1,3 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { apiRequestTyped } from '@/lib/api/server';
 import { HTTP_STATUS } from '@fuga-catalog/constants';
 import type {
   GetProductResponse,
@@ -7,6 +5,8 @@ import type {
   UpdateProductInput,
   DeleteProductResponse,
 } from '@fuga-catalog/types';
+import { NextRequest, NextResponse } from 'next/server';
+import { apiRequestTyped } from '@/lib/api/server';
 
 type Params = Promise<{ id: string }>;
 

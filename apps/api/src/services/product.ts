@@ -1,6 +1,6 @@
 import type { CreateProductInput, UpdateProductInput } from '@fuga-catalog/types';
-import { prisma } from '../lib/prisma';
 import { AppError } from '../lib/errors';
+import { prisma } from '../lib/prisma';
 import { CoverArtService } from './cover-art';
 
 export class ProductService {

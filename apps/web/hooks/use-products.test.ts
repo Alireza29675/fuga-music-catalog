@@ -1,8 +1,8 @@
-import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderHook, waitFor } from '@testing-library/react';
+import React, { ReactNode } from 'react';
 import { useProducts, useCreateProduct, useDeleteProduct } from './use-products';
 import { apiFetch } from '@/lib/api/client';
-import React, { ReactNode } from 'react';
 
 // Mock the API
 jest.mock('../lib/api/client');

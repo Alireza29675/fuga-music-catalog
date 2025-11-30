@@ -1,7 +1,7 @@
-import { renderHook } from '@testing-library/react';
-import { usePermissions } from './use-permissions';
-import { useAuth } from './use-auth';
 import { PERMISSIONS } from '@fuga-catalog/constants';
+import { renderHook } from '@testing-library/react';
+import { useAuth } from './use-auth';
+import { usePermissions } from './use-permissions';
 
 // Mock the useAuth hook
 jest.mock('./use-auth');

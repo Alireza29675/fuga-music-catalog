@@ -1,8 +1,8 @@
-import { Router, type Router as ExpressRouter } from 'express';
-import { ProductService } from '../services/product';
-import { authenticate, requirePermission } from '../middleware/auth';
-import { createProductSchema, updateProductSchema } from '../lib/validation';
 import { PERMISSIONS } from '@fuga-catalog/constants';
+import { Router, type Router as ExpressRouter } from 'express';
+import { createProductSchema, updateProductSchema } from '../lib/validation';
+import { authenticate, requirePermission } from '../middleware/auth';
+import { ProductService } from '../services/product';
 
 export const productsRouter: ExpressRouter = Router();
 const productService = new ProductService();

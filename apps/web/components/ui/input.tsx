@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const StyledInput = styled.input`
   display: flex;

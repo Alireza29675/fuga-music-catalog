@@ -1,8 +1,9 @@
 'use client';
 
-import * as React from 'react';
 import { Check, Plus } from 'lucide-react';
+import * as React from 'react';
 import styled from 'styled-components';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -13,7 +14,6 @@ import {
   CommandSeparator,
 } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
 
 interface Artist {
   id: number;

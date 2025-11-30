@@ -1,5 +1,5 @@
-import { config } from 'dotenv';
 import { resolve } from 'path';
+import { config } from 'dotenv';
 import { z } from 'zod';
 
 config({ path: resolve(__dirname, '../../../.env') });

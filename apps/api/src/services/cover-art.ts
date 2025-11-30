@@ -1,9 +1,9 @@
 import { randomUUID } from 'crypto';
-import type { CoverArtUploadResponse, AllowedImageFormat } from '@fuga-catalog/types';
 import { ALLOWED_IMAGE_FORMATS, MAX_COVER_ART_SIZE_BYTES, ERROR_CODES } from '@fuga-catalog/constants';
+import type { CoverArtUploadResponse, AllowedImageFormat } from '@fuga-catalog/types';
+import { AppError } from '../lib/errors';
 import { prisma } from '../lib/prisma';
 import { storage } from '../lib/storage';
-import { AppError } from '../lib/errors';
 
 export class CoverArtService {
   async upload(buffer: Buffer, mimeType: string, userId: number): Promise<CoverArtUploadResponse> {

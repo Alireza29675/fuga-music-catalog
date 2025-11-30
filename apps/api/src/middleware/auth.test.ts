@@ -1,8 +1,8 @@
+import type { AuthPayload } from '@fuga-catalog/types';
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { authenticate, requirePermission } from './auth';
 import { AppError } from '../lib/errors';
-import type { AuthPayload } from '@fuga-catalog/types';
+import { authenticate, requirePermission } from './auth';
 
 describe('Auth Middleware', () => {
   let mockRequest: Partial<Request>;

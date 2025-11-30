@@ -1,10 +1,11 @@
 /**
  * Server-side API (Next.js Server → API Server)
  */
-import { cookies } from 'next/headers';
 import type { ApiError } from '@fuga-catalog/types';
+import { cookies } from 'next/headers';
+import { env } from '@/lib/env';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_URL = env.NEXT_PUBLIC_API_URL;
 
 export async function apiRequest(path: string, options: RequestInit = {}): Promise<Response> {
   const cookieStore = await cookies();

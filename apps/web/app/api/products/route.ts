@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { apiRequestTyped } from '@/lib/api/server';
 import { HTTP_STATUS } from '@fuga-catalog/constants';
 import type { GetProductsResponse, CreateProductResponse, CreateProductInput } from '@fuga-catalog/types';
+import { NextRequest, NextResponse } from 'next/server';
+import { apiRequestTyped } from '@/lib/api/server';
 
 export async function GET() {
   try {

@@ -1,3 +1,4 @@
+import globals from 'globals';
 import baseConfig from './base.js';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -11,17 +12,27 @@ export default [
 
   // React configuration
   {
-    files: ['**/*.tsx', '**/*.jsx'],
-    plugins: {
-      react,
-      'react-hooks': reactHooks,
-    },
+    files: ['**/*.tsx', '**/*.jsx', '**/*.ts', '**/*.js'],
     languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node, // For Next.js server-side code
+        ...globals.jest,
+        React: 'readonly',
+        JSX: 'readonly',
+        // TypeScript DOM types (not included in globals.browser)
+        RequestInit: 'readonly',
+        HeadersInit: 'readonly',
+      },
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
         },
       },
+    },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
     },
     settings: {
       react: {
@@ -57,6 +68,15 @@ export default [
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       'no-console': 'off',
+      'react/display-name': 'off',
+    },
+  },
+
+  // Type declaration files - allow empty interfaces for module augmentation
+  {
+    files: ['**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/no-empty-object-type': 'off',
     },
   },
 ];

@@ -1,9 +1,9 @@
 'use client';
 
 // Generated via Shadcn/UI
+import { X } from 'lucide-react';
 import * as React from 'react';
 import styled from 'styled-components';
-import { X } from 'lucide-react';
 
 type ToastType = 'success' | 'error' | 'info';
 

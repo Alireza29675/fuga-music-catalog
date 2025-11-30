@@ -1,8 +1,8 @@
 'use client';
 
 // Generated via Shadcn/UI
-import * as React from 'react';
 import { Command as CommandPrimitive } from 'cmdk';
+import * as React from 'react';
 import styled from 'styled-components';
 
 const StyledCommand = styled(CommandPrimitive)`

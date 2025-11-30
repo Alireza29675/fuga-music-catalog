@@ -1,5 +1,3 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiFetch, uploadFile } from '@/lib/api/client';
 import type {
   CreateProductInput,
   UpdateProductInput,
@@ -13,6 +11,8 @@ import type {
   GetContributionTypesResponse,
   CoverArtUploadResponse,
 } from '@fuga-catalog/types';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiFetch, uploadFile } from '@/lib/api/client';
 
 export function useProducts() {
   return useQuery<GetProductsResponse>({

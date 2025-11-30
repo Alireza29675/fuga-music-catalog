@@ -1,17 +1,17 @@
 'use client';
 
+import type { Product, CreateProductInput } from '@fuga-catalog/types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { X, Upload, Loader2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { X, Upload, Loader2 } from 'lucide-react';
 import styled, { keyframes } from 'styled-components';
+import { z } from 'zod';
+import { ArtistCombobox } from '@/components/artist-combobox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArtistCombobox } from '@/components/artist-combobox';
 import { useUploadCoverArt, useArtists, useCreateArtist, useContributionTypes } from '@/hooks/use-products';
-import type { Product, CreateProductInput } from '@fuga-catalog/types';
 
 const productFormSchema = z.object({
   name: z.string().min(1, 'Product name is required'),

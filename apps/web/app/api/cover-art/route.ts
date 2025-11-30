@@ -1,9 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 import { HTTP_STATUS } from '@fuga-catalog/constants';
 import type { CoverArtUploadResponse, ApiError } from '@fuga-catalog/types';
+import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
+import { env } from '@/lib/env';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_URL = env.NEXT_PUBLIC_API_URL;
 
 export async function POST(request: NextRequest) {
   try {

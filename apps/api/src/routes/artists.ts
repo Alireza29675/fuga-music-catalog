@@ -1,8 +1,8 @@
-import { Router, type Router as ExpressRouter } from 'express';
-import { ArtistService } from '../services/artist';
-import { authenticate, requirePermission } from '../middleware/auth';
-import { createArtistSchema } from '../lib/validation';
 import { PERMISSIONS } from '@fuga-catalog/constants';
+import { Router, type Router as ExpressRouter } from 'express';
+import { createArtistSchema } from '../lib/validation';
+import { authenticate, requirePermission } from '../middleware/auth';
+import { ArtistService } from '../services/artist';
 
 export const artistsRouter: ExpressRouter = Router();
 const artistService = new ArtistService();

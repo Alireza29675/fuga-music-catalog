@@ -1,7 +1,7 @@
-import { ArtistService } from './artist';
-import { prisma } from '../lib/prisma';
-import { AppError } from '../lib/errors';
 import { ERROR_CODES } from '@fuga-catalog/constants';
+import { AppError } from '../lib/errors';
+import { prisma } from '../lib/prisma';
+import { ArtistService } from './artist';
 
 // Mock Prisma
 jest.mock('../lib/prisma', () => ({

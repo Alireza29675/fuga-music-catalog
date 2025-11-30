@@ -1,10 +1,10 @@
-import { PrismaClient } from '../src/generated/prisma/client';
-import { Pool } from 'pg';
-import { PrismaPg } from '@prisma/adapter-pg';
-import bcrypt from 'bcryptjs';
 import { PERMISSIONS } from '@fuga-catalog/constants';
 import { PermissionKey } from '@fuga-catalog/types';
+import { PrismaPg } from '@prisma/adapter-pg';
+import bcrypt from 'bcryptjs';
+import { Pool } from 'pg';
 import { env } from '../src/env';
+import { PrismaClient } from '../src/generated/prisma/client';
 
 const pool = new Pool({ connectionString: env.DATABASE_URL });
 const adapter = new PrismaPg(pool);

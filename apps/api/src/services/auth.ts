@@ -1,9 +1,9 @@
+import type { LoginApiResponse } from '@fuga-catalog/types';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { prisma } from '../lib/prisma';
-import { AppError } from '../lib/errors';
 import { env } from '../env';
-import type { LoginApiResponse } from '@fuga-catalog/types';
+import { AppError } from '../lib/errors';
+import { prisma } from '../lib/prisma';
 
 const JWT_SECRET = env.JWT_SECRET;
 const JWT_EXPIRES_IN = '24h';

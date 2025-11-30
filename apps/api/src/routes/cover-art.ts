@@ -1,9 +1,9 @@
+import { ALLOWED_IMAGE_FORMATS, MAX_COVER_ART_SIZE_BYTES, ERROR_CODES, PERMISSIONS } from '@fuga-catalog/constants';
 import { Router, type Router as ExpressRouter } from 'express';
 import multer from 'multer';
-import { ALLOWED_IMAGE_FORMATS, MAX_COVER_ART_SIZE_BYTES, ERROR_CODES, PERMISSIONS } from '@fuga-catalog/constants';
-import { CoverArtService } from '../services/cover-art';
-import { authenticate, requirePermission } from '../middleware/auth';
 import { AppError } from '../lib/errors';
+import { authenticate, requirePermission } from '../middleware/auth';
+import { CoverArtService } from '../services/cover-art';
 
 export const coverArtRouter: ExpressRouter = Router();
 const coverArtService = new CoverArtService();

@@ -1,8 +1,8 @@
-import { ProductService } from './product';
-import { prisma } from '../lib/prisma';
-import { AppError } from '../lib/errors';
 import type { CreateProductInput } from '@fuga-catalog/types';
+import { AppError } from '../lib/errors';
+import { prisma } from '../lib/prisma';
 import { CoverArtService } from './cover-art';
+import { ProductService } from './product';
 
 // Mock dependencies
 jest.mock('../lib/prisma', () => ({
