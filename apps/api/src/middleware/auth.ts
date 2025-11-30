@@ -4,14 +4,6 @@ import type { AuthPayload, PermissionKey } from '@fuga-catalog/types';
 import { AppError } from '../lib/errors';
 import { env } from '../env';
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: AuthPayload;
-    }
-  }
-}
-
 const JWT_SECRET = env.JWT_SECRET;
 const BEARER_PREFIX = 'Bearer ';
 
