@@ -17,7 +17,7 @@ export function AuthInitializer() {
     if (isAuthenticated && pathname !== '/login') {
       validateToken();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

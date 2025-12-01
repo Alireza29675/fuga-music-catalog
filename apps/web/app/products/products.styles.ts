@@ -87,7 +87,7 @@ export const ProductInfo = styled(CardContent)`
   padding: ${({ theme }) => theme.spacing.md};
 `;
 
-export const ArtistList = styled.div<{ children: ReactNode, $visibleRows: number }>`
+export const ArtistList = styled.div<{ children: ReactNode; $visibleRows: number }>`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -101,7 +101,8 @@ export const ArtistList = styled.div<{ children: ReactNode, $visibleRows: number
   &::after {
     content: '';
     pointer-events: none;
-    display: ${({ children, $visibleRows }) => (React.Children.count(children || []) > $visibleRows ? 'block' : 'none')};
+    display: ${({ children, $visibleRows }) =>
+      React.Children.count(children || []) > $visibleRows ? 'block' : 'none'};
     position: absolute;
     opacity: 1;
     transition: opacity 0.3s;
@@ -127,7 +128,9 @@ export const ActionButtons = styled.div`
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 `;
 
 export const ProductCardWrapper = styled.div`
@@ -137,7 +140,9 @@ export const ProductCardWrapper = styled.div`
 
 export const ProductCard = styled(Card)`
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.3s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.3s;
   box-shadow: ${({ theme }) => theme.shadows.sm};
   position: absolute;
   width: 100%;
