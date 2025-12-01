@@ -1,10 +1,33 @@
+/* eslint-disable no-process-exit */
+/* eslint-disable no-console */
+import { resolve } from 'path';
 import { PERMISSIONS } from '@fuga-catalog/constants';
 import { PermissionKey } from '@fuga-catalog/types';
 import { PrismaPg } from '@prisma/adapter-pg';
 import bcrypt from 'bcryptjs';
+import { config } from 'dotenv';
 import { Pool } from 'pg';
-import { env } from '../src/env';
+import { z } from 'zod';
 import { PrismaClient } from '../src/generated/prisma/client';
+
+config({ path: resolve(__dirname, '../../../.env') });
+
+const envSchema = z.object({
+  DATABASE_URL: z.string().url('DATABASE_URL must be a valid URL'),
+  ADMIN_EMAIL: z.string().email('ADMIN_EMAIL must be a valid email'),
+  ADMIN_INIT_PASSWORD: z.string().min(1, 'ADMIN_INIT_PASSWORD is required'),
+});
+
+// eslint-disable-next-line custom-rules/no-process-env
+const parseResult = envSchema.safeParse(process.env);
+
+if (!parseResult.success) {
+  console.error('❌ Invalid environment variables:');
+  console.error(JSON.stringify(parseResult.error.format(), null, 2));
+  process.exit(1);
+}
+
+const env = parseResult.data;
 
 const pool = new Pool({ connectionString: env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
