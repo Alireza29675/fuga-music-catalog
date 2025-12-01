@@ -18,24 +18,46 @@ function useDialog() {
   return context;
 }
 
-const Overlay = styled.div`
+const Overlay = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
   inset: 0;
+  z-index: 998;
   background-color: ${({ theme }) => theme.colors.overlay};
+  animation: ${({ $isClosing }) => ($isClosing ? 'fadeOut' : 'fadeIn')} 0.1s ease-out;
+  pointer-events: ${({ $isClosing }) => ($isClosing ? 'none' : 'auto')};
+  backdrop-filter: blur(3px);
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 `;
 
 const ContentWrapper = styled.div`
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-const StyledDialogContent = styled.div`
+const StyledDialogContent = styled.div<{ $isClosing?: boolean }>`
   position: relative;
-  z-index: 50;
+  z-index: 999;
   display: grid;
   width: 100%;
   max-width: 32rem;
@@ -45,6 +67,29 @@ const StyledDialogContent = styled.div`
   padding: ${({ theme }) => theme.spacing.lg};
   box-shadow: ${({ theme }) => theme.shadows.lg};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
+  animation: ${({ $isClosing }) => ($isClosing ? 'scaleOut' : 'scaleIn')} 0.1s ease-out;
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes scaleOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
 
   @media (max-width: 640px) {
     border-radius: 0;
@@ -162,14 +207,32 @@ export function DialogTrigger({
 
 export function DialogContent({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const { open, onOpenChange } = useDialog();
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [isClosing, setIsClosing] = React.useState(false);
+  const [frozenChildren, setFrozenChildren] = React.useState<React.ReactNode>(null);
 
-  if (!open) return null;
+  React.useEffect(() => {
+    if (open) {
+      setIsVisible(true);
+      setIsClosing(false);
+      setFrozenChildren(children);
+    } else if (isVisible) {
+      setIsClosing(true);
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+        setIsClosing(false);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [open, isVisible, children]);
+
+  if (!isVisible) return null;
 
   return (
     <ContentWrapper>
-      <Overlay onClick={() => onOpenChange(false)} />
-      <StyledDialogContent {...props}>
-        {children}
+      <Overlay $isClosing={isClosing} onClick={() => onOpenChange(false)} />
+      <StyledDialogContent $isClosing={isClosing} {...props}>
+        {frozenChildren}
         <CloseButton onClick={() => onOpenChange(false)}>
           <X size={16} />
           <VisuallyHidden>Close</VisuallyHidden>
@@ -203,14 +266,32 @@ const StyledScrollableDialogContent = styled(StyledDialogContent)`
 
 export function ScrollableDialogContent({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const { open, onOpenChange } = useDialog();
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [isClosing, setIsClosing] = React.useState(false);
+  const [frozenChildren, setFrozenChildren] = React.useState<React.ReactNode>(null);
 
-  if (!open) return null;
+  React.useEffect(() => {
+    if (open) {
+      setIsVisible(true);
+      setIsClosing(false);
+      setFrozenChildren(children);
+    } else if (isVisible) {
+      setIsClosing(true);
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+        setIsClosing(false);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [open, isVisible, children]);
+
+  if (!isVisible) return null;
 
   return (
     <ContentWrapper>
-      <Overlay onClick={() => onOpenChange(false)} />
-      <StyledScrollableDialogContent {...props}>
-        {children}
+      <Overlay $isClosing={isClosing} onClick={() => onOpenChange(false)} />
+      <StyledScrollableDialogContent $isClosing={isClosing} {...props}>
+        {frozenChildren}
         <CloseButton onClick={() => onOpenChange(false)}>
           <X size={16} />
           <VisuallyHidden>Close</VisuallyHidden>

@@ -23,6 +23,7 @@ const StyledButton = styled.button<ButtonProps>`
   border: none;
   cursor: pointer;
   font-family: inherit;
+  backdrop-filter: blur(4px);
 
   &:focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.inputFocus};

@@ -1,6 +1,6 @@
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 export const PageWrapper = styled.div`
   min-height: 100vh;
@@ -8,7 +8,13 @@ export const PageWrapper = styled.div`
 `;
 
 export const Header = styled.header`
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  backdrop-filter: blur(16px);
 `;
 
 export const HeaderContent = styled.div`
@@ -47,6 +53,7 @@ export const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: ${({ theme }) => theme.spacing.md};
+  align-items: start;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -59,10 +66,6 @@ export const ProductGrid = styled.div`
   @media (min-width: 1280px) {
     grid-template-columns: repeat(4, 1fr);
   }
-`;
-
-export const ProductCard = styled(Card)`
-  overflow: hidden;
 `;
 
 export const CoverArtContainer = styled.div`
@@ -84,10 +87,30 @@ export const ProductInfo = styled(CardContent)`
   padding: ${({ theme }) => theme.spacing.md};
 `;
 
-export const ArtistList = styled.div`
+export const ArtistList = styled.div<{ children: ReactNode, $visibleRows: number }>`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  overflow: hidden;
+  min-height: ${({ $visibleRows }) => $visibleRows * 1.25}rem;
+  max-height: ${({ $visibleRows }) => $visibleRows * 1.25}rem;
+  position: relative;
+  transition: max-height 0.3s;
+  padding-bottom: ${({ theme }) => theme.spacing.sm};
+
+  &::after {
+    content: '';
+    pointer-events: none;
+    display: ${({ children, $visibleRows }) => (React.Children.count(children || []) > $visibleRows ? 'block' : 'none')};
+    position: absolute;
+    opacity: 1;
+    transition: opacity 0.3s;
+    right: 0;
+    top: calc(100% - 2rem);
+    width: 100%;
+    height: 2rem;
+    background: linear-gradient(to bottom, transparent, ${({ theme }) => theme.colors.background});
+  }
 `;
 
 export const ArtistText = styled.p`
@@ -95,15 +118,49 @@ export const ArtistText = styled.p`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-export const ActionButtons = styled(CardFooter)`
-  padding: ${({ theme }) => theme.spacing.md};
-  padding-top: 0;
+export const ActionButtons = styled.div`
+  position: absolute;
+  bottom: ${({ theme }) => theme.spacing.sm};
+  right: ${({ theme }) => theme.spacing.sm};
   display: flex;
-  gap: ${({ theme }) => theme.spacing.sm};
+  gap: ${({ theme }) => theme.spacing.xs};
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 `;
 
-export const FlexButton = styled(Button)`
-  flex: 1;
+export const ProductCardWrapper = styled.div`
+  position: relative;
+  aspect-ratio: 1/1.35;
+`;
+
+export const ProductCard = styled(Card)`
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.3s;
+  box-shadow: ${({ theme }) => theme.shadows.sm};
+  position: absolute;
+  width: 100%;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: ${({ theme }) => theme.shadows.lg};
+    z-index: 10;
+
+    ${ArtistList} {
+      max-height: 30rem;
+
+      &::after {
+        opacity: 0;
+      }
+    }
+
+    ${ActionButtons} {
+      pointer-events: auto;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 export const EmptyState = styled(CardContent)`

@@ -118,7 +118,7 @@ export default function ProductsPage() {
                 <Button onClick={() => setIsCreateDialogOpen(true)}>
                   <ButtonIcon>
                     <Plus size={16} />
-                    Create Product
+                    New Product
                   </ButtonIcon>
                 </Button>
               </PermissionGuard>
@@ -127,42 +127,38 @@ export default function ProductsPage() {
         ) : (
           <S.ProductGrid>
             {products?.map((product) => (
-              <S.ProductCard key={product.id}>
-                <CardHeader style={{ padding: 0 }}>
-                  <S.CoverArtContainer>
-                    {product.coverArt && <img src={product.coverArt.resourceUri} alt={product.name} />}
-                  </S.CoverArtContainer>
-                </CardHeader>
-                <S.ProductInfo>
-                  <CardTitle style={{ fontSize: '1.125rem', marginBottom: '0.5rem' }}>{product.name}</CardTitle>
-                  <S.ArtistList>
-                    {product.productArtists.map((pa, index) => (
-                      <S.ArtistText key={index}>
-                        {pa.artist.name}
-                        {pa.contributionType && ` (${pa.contributionType.name})`}
-                      </S.ArtistText>
-                    ))}
-                  </S.ArtistList>
-                </S.ProductInfo>
-                <S.ActionButtons>
-                  <PermissionGuard permission={PERMISSIONS.PRODUCT_EDIT}>
-                    <S.FlexButton variant="outline" size="sm" onClick={() => setEditingProduct(product)}>
-                      <ButtonIcon>
-                        <Pencil size={16} />
-                        Edit
-                      </ButtonIcon>
-                    </S.FlexButton>
-                  </PermissionGuard>
-                  <PermissionGuard permission={PERMISSIONS.PRODUCT_EDIT}>
-                    <S.FlexButton variant="outline" size="sm" onClick={() => setDeletingProduct(product)}>
-                      <ButtonIcon>
-                        <Trash2 size={16} />
-                        Delete
-                      </ButtonIcon>
-                    </S.FlexButton>
-                  </PermissionGuard>
-                </S.ActionButtons>
-              </S.ProductCard>
+              <S.ProductCardWrapper key={product.id}>
+                <S.ProductCard>
+                  <CardHeader style={{ padding: 0 }}>
+                    <S.CoverArtContainer>
+                      {product.coverArt && <img src={product.coverArt.resourceUri} alt={product.name} />}
+                      <S.ActionButtons>
+                        <PermissionGuard permission={PERMISSIONS.PRODUCT_EDIT}>
+                          <Button variant="secondary" size="icon" onClick={() => setEditingProduct(product)}>
+                            <Pencil size={16} />
+                          </Button>
+                        </PermissionGuard>
+                        <PermissionGuard permission={PERMISSIONS.PRODUCT_EDIT}>
+                          <Button variant="secondary" size="icon" onClick={() => setDeletingProduct(product)}>
+                            <Trash2 size={16} />
+                          </Button>
+                        </PermissionGuard>
+                      </S.ActionButtons>
+                    </S.CoverArtContainer>
+                  </CardHeader>
+                  <S.ProductInfo>
+                    <CardTitle style={{ fontSize: '1.125rem', marginBottom: '0.5rem' }}>{product.name}</CardTitle>
+                    <S.ArtistList $visibleRows={2}>
+                      {product.productArtists.map((pa, index) => (
+                        <S.ArtistText key={index}>
+                          {pa.artist.name}
+                          {pa.contributionType && ` (${pa.contributionType.name})`}
+                        </S.ArtistText>
+                      ))}
+                    </S.ArtistList>
+                  </S.ProductInfo>
+                </S.ProductCard>
+              </S.ProductCardWrapper>
             ))}
           </S.ProductGrid>
         )}
@@ -172,7 +168,7 @@ export default function ProductsPage() {
         <ScrollableDialogContent>
           <DialogHeader>
             <DialogTitle>Create New Product</DialogTitle>
-            <DialogDescription>Add a new music product to your catalog</DialogDescription>
+            <DialogDescription>Add a new music product to the catalog</DialogDescription>
           </DialogHeader>
           <ProductForm
             onSubmit={handleCreateProduct}
