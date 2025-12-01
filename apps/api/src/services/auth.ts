@@ -1,4 +1,4 @@
-import type { LoginApiResponse } from '@fuga-catalog/types';
+import type { LoginApiResponse, MeApiResponse } from '@fuga-catalog/types';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { env } from '../env';
@@ -58,6 +58,29 @@ export class AuthService {
         roles,
         permissions: permissions as LoginApiResponse['user']['permissions'],
       },
+    };
+  }
+
+  async getMe(userId: number): Promise<MeApiResponse> {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      include: PERMISSIONS_INCLUDE,
+    });
+
+    if (!user || !user.isActive) {
+      throw new AppError('User not found or inactive', 401, 'UNAUTHORIZED');
+    }
+
+    const roles = user.userRoles.map((ur) => ur.role.name);
+    const permissions = [
+      ...new Set(user.userRoles.flatMap((ur) => ur.role.rolePermissions.map((rp) => rp.permission.key))),
+    ];
+
+    return {
+      id: user.id,
+      email: user.email,
+      roles,
+      permissions: permissions as MeApiResponse['permissions'],
     };
   }
 }

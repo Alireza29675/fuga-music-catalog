@@ -39,8 +39,8 @@ export default function LoginPage() {
     <S.PageContainer>
       <S.StyledCard>
         <CardHeader>
-          <CardTitle>Welcome to FUGA</CardTitle>
-          <CardDescription>Sign in to manage the music catalog</CardDescription>
+          <CardTitle>Welcome to FUGA Music Catalog</CardTitle>
+          <CardDescription>Sign in to manage the available music products</CardDescription>
         </CardHeader>
         <CardContent>
           <Form onSubmit={handleSubmit(onSubmit)}>

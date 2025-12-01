@@ -31,3 +31,5 @@ export interface LoginApiResponse {
 }
 
 export type LogoutApiResponse = SuccessResponse;
+
+export type MeApiResponse = LoginApiResponse['user'];
