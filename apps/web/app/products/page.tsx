@@ -203,9 +203,7 @@ export default function ProductsPage() {
         <ScrollableDialogContent>
           <DialogHeader>
             <DialogTitle>Delete Product</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to delete "{deletingProduct?.name}"?
-            </DialogDescription>
+            <DialogDescription>Are you sure you want to delete "{deletingProduct?.name}"?</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDeletingProduct(null)}>

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@fuga-catalog/types';
 import { AppError } from './errors';
 
 describe('Error Classes', () => {
@@ -13,7 +14,7 @@ describe('Error Classes', () => {
     });
 
     it('should create an error with custom status code', () => {
-      const error = new AppError('Custom error', 418);
+      const error = new AppError('Custom error', 418 as HttpStatusCode);
 
       expect(error.message).toBe('Custom error');
       expect(error.statusCode).toBe(418);

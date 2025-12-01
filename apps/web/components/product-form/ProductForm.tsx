@@ -29,7 +29,7 @@ export function ProductForm({ product, onSubmit, onCancel, isLoading }: ProductF
 
   const uploadCoverArt = useUploadCoverArt();
   const { data: artists = [] } = useArtists('');
-  
+
   const createArtist = useCreateArtist();
   const { data: contributionTypes = [] } = useContributionTypes();
 

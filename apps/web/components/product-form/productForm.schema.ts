@@ -15,6 +15,6 @@ export const productFormSchema = z.object({
       })
     )
     .min(1, 'At least one artist is required'),
-}) satisfies z.ZodType<CreateProductInput>
+}) satisfies z.ZodType<CreateProductInput>;
 
 export type ProductFormData = z.infer<typeof productFormSchema>;

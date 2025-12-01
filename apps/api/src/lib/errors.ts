@@ -1,4 +1,4 @@
-import { ErrorCode, HttpStatusCode } from "@fuga-catalog/types";
+import { ErrorCode, HttpStatusCode } from '@fuga-catalog/types';
 
 export class AppError extends Error {
   constructor(
