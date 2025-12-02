@@ -12,7 +12,7 @@ const PopoverTrigger = PopoverPrimitive.Trigger;
 const PopoverAnchor = PopoverPrimitive.Anchor;
 
 const StyledPopoverContent = styled(PopoverPrimitive.Content)`
-  z-index: 100;
+  z-index: 1000;
   min-width: 8rem;
   overflow: hidden;
   border-radius: ${({ theme }) => theme.borderRadius.md};
