@@ -17,7 +17,7 @@ const ToastContainer = styled.div`
   position: fixed;
   bottom: ${({ theme }) => theme.spacing.md};
   right: ${({ theme }) => theme.spacing.md};
-  z-index: 50;
+  z-index: ${({ theme }) => theme.zIndex.toast};
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.sm};

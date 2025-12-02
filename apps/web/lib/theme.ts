@@ -62,6 +62,14 @@ export const theme = {
     normal: '200ms ease-in-out',
     slow: '300ms ease-in-out',
   },
+  zIndex: {
+    base: 10,
+    header: 11,
+    dialogOverlay: 50,
+    dialog: 51,
+    toast: 52,
+    popover: 100,
+  },
 };
 
 export type Theme = typeof theme;

@@ -21,7 +21,7 @@ function useDialog() {
 const Overlay = styled.div<{ $isClosing?: boolean }>`
   position: fixed;
   inset: 0;
-  z-index: 998;
+  z-index: ${({ theme }) => theme.zIndex.dialogOverlay};
   background-color: ${({ theme }) => theme.colors.overlay};
   animation: ${({ $isClosing }) => ($isClosing ? 'fadeOut' : 'fadeIn')} 0.1s ease-out;
   pointer-events: ${({ $isClosing }) => ($isClosing ? 'none' : 'auto')};
@@ -49,7 +49,7 @@ const Overlay = styled.div<{ $isClosing?: boolean }>`
 const ContentWrapper = styled.div`
   position: fixed;
   inset: 0;
-  z-index: 999;
+  z-index: ${({ theme }) => theme.zIndex.dialog};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +57,7 @@ const ContentWrapper = styled.div`
 
 const StyledDialogContent = styled.div<{ $isClosing?: boolean }>`
   position: relative;
-  z-index: 999;
+  z-index: ${({ theme }) => theme.zIndex.dialog};
   display: grid;
   width: 100%;
   max-width: 32rem;

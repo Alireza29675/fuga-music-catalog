@@ -10,7 +10,7 @@ export const PageWrapper = styled.div`
 export const Header = styled.header`
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: ${({ theme }) => theme.zIndex.header};
   width: 100%;
   background-color: rgba(255, 255, 255, 0.7);
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
@@ -150,7 +150,7 @@ export const ProductCard = styled(Card)`
   &:hover {
     transform: scale(1.02);
     box-shadow: ${({ theme }) => theme.shadows.lg};
-    z-index: 10;
+    z-index: ${({ theme }) => theme.zIndex.base};
 
     ${ArtistList} {
       max-height: 30rem;
